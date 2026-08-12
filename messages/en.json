@@ -3,7 +3,26 @@
     "brandAlt": "Sun* Annual Awards 2025",
     "copyright": "Copyright Sun* © 2025",
     "languageLabel": "Language",
-    "chooseLanguage": "Choose a language"
+    "chooseLanguage": "Choose a language",
+    "primaryNavLabel": "Primary navigation",
+    "footerNavLabel": "Footer navigation",
+    "nav": {
+      "aboutSaa": "About SAA 2025",
+      "awardInformation": "Award Information",
+      "sunKudos": "Sun* Kudos",
+      "generalStandards": "General Standards"
+    },
+    "notifications": {
+      "label": "Notifications",
+      "labelWithCount": "Notifications, {count} unread",
+      "empty": "No notifications yet."
+    },
+    "account": {
+      "label": "Account",
+      "profile": "Profile",
+      "adminDashboard": "Admin Dashboard",
+      "signOut": "Sign out"
+    }
   },
   "login": {
     "title": "Sign in",
@@ -14,5 +33,74 @@
     "googleButton": "LOGIN With Google",
     "signingIn": "Signing in…",
     "error": "Sign-in failed. Please try again."
+  },
+  "home": {
+    "hero": {
+      "keyVisualAlt": "ROOT FURTHER",
+      "aboutAwards": "ABOUT AWARDS",
+      "aboutKudos": "ABOUT KUDOS"
+    },
+    "countdown": {
+      "comingSoon": "Comming soon",
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTES",
+      "summary": "{days} days {hours} hours {minutes} minutes remaining"
+    },
+    "event": {
+      "timeLabel": "Time:",
+      "timeValue": "26/12/2025",
+      "venueLabel": "Venue:",
+      "venueValue": "Âu Cơ Art Center",
+      "broadcast": "Broadcast live via Livestream"
+    },
+    "rootFurther": {
+      "heading": "Root Further — the Sun* Annual Awards 2025 theme",
+      "intro": "Facing the breakneck pace of change in the AI era and ever-rising client expectations, Sun* has chosen a strategy of broadening capability — not merely striving to excel in our own field, but reaching for something higher: a place where every Sunner is a “problem-solver”, an expert at working through any obstacle and finding the answer to whatever a project, a client, or society sets before us.\nDrawing on that breadth of capability, on the ability to grow and adapt, and on the resolve to dig deep in order to break through in the age of AI, “Root Further” was chosen as the official theme of the Sun* Annual Awards 2025.\nBeyond its surface meaning, “Root Further” is the journey of reaching ever wider, rooting ever deeper, touching the hidden “strata” below in order to endure, to rise, and to keep alive the Sun* passion for creating value. Like roots driving relentlessly into the earth, pressing through layer after layer of “sediment” to draw up what is purest, Sunners too are absorbing nourishment from the times and from the trials of the market — renewing ourselves each day, widening our capability, and rooting ourselves firmly in the AI era: a wholly new stratum, complex and hard to read, yet dense with potential and opportunity.",
+      "quote": "“A tree with deep roots fears no storm”\n(English proverb)",
+      "outro": "When the storm comes, only the trees whose roots run deep hold their ground. An organisation of people who trust the range of their own abilities, who are ready to create and to meet a challenge, who take command of change — such an organisation does not merely withstand upheaval; it turns every advantage to account and masters what the moment demands. “Root Further” is not simply the title of a new chapter in how this organisation grows. It is an encouragement to each of us: dare to believe in yourself, dare to dig deep, dare to open up every last reserve of potential, dare to break your own limits, dare to become the most versatile and most accomplished version of yourself. Because in the age of AI, breadth of capability and the ability to harness the force of the times are the very conditions of lasting.\nNo one can say how many more hidden “strata” lie deep in the ground of the technology industry and today's market. We know only this: once “Root Further” has become the spirit at our roots, we will meet any uncharted ground on the road ahead not with fear, but with eagerness. Because we believe that within those very expanses lie wonders, and the chance to rise."
+    },
+    "awards": {
+      "caption": "Sun* annual awards 2025",
+      "title": "Award system",
+      "detail": "Details",
+      "items": {
+        "topTalent": {
+          "title": "Top Talent",
+          "description": "Honouring the top individuals who excel on every front"
+        },
+        "topProject": {
+          "title": "Top Project",
+          "description": "Honouring projects that excel on every front, including standout revenue"
+        },
+        "topProjectLeader": {
+          "title": "Top Project Leader",
+          "description": "Honouring the leader who inspires and drives a project to break through,"
+        },
+        "bestManager": {
+          "title": "Best Manager",
+          "description": "Honouring the manager who leads a team with real management strength"
+        },
+        "signatureCreator": {
+          "title": "Signature 2025 - Creator",
+          "description": "Honouring the manager who leads a team with real management strength"
+        },
+        "mvp": {
+          "title": "MVP (Most Valuable Person)",
+          "description": "Honouring the manager who leads a team with real management strength"
+        }
+      }
+    },
+    "kudos": {
+      "label": "Recognition movement",
+      "title": "Sun* Kudos",
+      "detail": "Details",
+      "logoAlt": "Sun* Kudos",
+      "body": "WHAT'S NEW IN SAA 2025\nAn activity for recognising and thanking colleagues — held for the first time, and open to every Sunner. Running from November 2025, it invites Sun* people to share their thanks and recognition for colleagues on the platform announced by the organising committee. What is shared there becomes material the Heads Council draws on when selecting the award recipients."
+    },
+    "widget": {
+      "label": "Quick actions",
+      "empty": "No actions available yet."
+    }
   }
 }
