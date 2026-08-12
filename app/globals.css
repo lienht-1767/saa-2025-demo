@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Design tokens measured from the MoMorph login frame (662:14387) */
+  --brand-yellow: #ffea9e;
+  --surface-dark: #0b0f12; /* header overlay, painted at 80% over the key visual */
+  --canvas: #01101a; /* key visual base colour, sampled from the Figma render */
+  --divider: #2e3940; /* footer border-top */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-surface-dark: var(--surface-dark);
+  --color-canvas: var(--canvas);
+  --color-divider: var(--divider);
+  --font-sans: var(--font-montserrat);
+  --font-alt: var(--font-montserrat-alternates);
+}
+
+/*
+ * Key visual for the login screen — `mms_C_Keyvisual` (662:14388), which spans the header
+ * and main content in the design. Declared here rather than as a Tailwind arbitrary value:
+ * a multi-layer background with commas cannot be expressed in one utility class.
+ */
+.login-artwork {
+  background-color: var(--canvas);
+  /* Keep the clean Figma export untouched. The two Figma scrims scale with the viewport,
+     avoiding the hard rectangular seam produced by baking them into the bitmap. */
+  background-image:
+    linear-gradient(0deg, #00101a 22.48%, rgba(0, 19, 32, 0) 51.74%),
+    linear-gradient(90deg, #00101a 0%, #00101a 25.41%, rgba(0, 16, 26, 0) 100%),
+    url("/images/login/hero-background.webp");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center, top right;
+  background-size: 100% 100%, 100% 100%, cover;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
+}

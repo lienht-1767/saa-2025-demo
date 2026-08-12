@@ -1,0 +1,18 @@
+{
+  "common": {
+    "brandAlt": "Sun* Annual Awards 2025",
+    "copyright": "Copyright Sun* © 2025",
+    "languageLabel": "Language",
+    "chooseLanguage": "Choose a language"
+  },
+  "login": {
+    "title": "Sign in",
+    "description": "Sign in to SAA 2025 with your Google account.",
+    "keyVisualAlt": "ROOT FURTHER",
+    "intro": "Start your journey with SAA 2025.",
+    "tagline": "Sign in to explore!",
+    "googleButton": "LOGIN With Google",
+    "signingIn": "Signing in…",
+    "error": "Sign-in failed. Please try again."
+  }
+}
