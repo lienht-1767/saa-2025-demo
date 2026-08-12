@@ -1,69 +1,65 @@
-import Image from "next/image";
+import { connection } from "next/server";
 
-export default function Home() {
+import { AwardsSection } from "@/components/home/awards-section";
+import { HomeHero } from "@/components/home/home-hero";
+import { KudosSection } from "@/components/home/kudos-section";
+import { QuickActionWidget } from "@/components/home/quick-action-widget";
+import { RootFurtherSection } from "@/components/home/root-further-section";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { computeCountdown, resolveEventStart } from "@/lib/home/countdown";
+
+/**
+ * SCR-home — MoMorph screen i87tDx10uM (Figma 2167:9026, "Homepage SAA").
+ *
+ * The frame is 1512 wide on a #00101A base, with `Bìa` (2167:9030) holding the four content
+ * sections 120px apart inside 96px/144px padding. `mms_3.5_Keyvisual` (2167:9027) and the
+ * `Cover` scrim (2167:9029) cover the top 1480px only, so they are painted as one decorative
+ * layer behind the header and hero rather than as a wrapper — `main` has to span every section.
+ *
+ * `/` is a public route. Until the session read layer lands, the authenticated design state is
+ * rendered here so the notification and account controls from Figma remain visible and usable.
+ * Replace this preview state with real session data without changing the header component.
+ */
+const FIGMA_HEADER_PREVIEW = {
+  isAuthenticated: true,
+  isAdmin: false,
+  unreadNotificationCount: 1,
+} as const;
+
+export default async function HomePage() {
+  await connection();
+  const deadlineMs = resolveEventStart();
+  // Request-time snapshot for the hydration-safe countdown seed. `connection()` above keeps this
+  // non-deterministic read out of prerendering, per the Next.js 16 runtime guidance.
+  // eslint-disable-next-line react-hooks/purity
+  const initial = computeCountdown(deadlineMs, Date.now());
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    /* mm:2167:9026 */
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-canvas">
+      {/* mm:2167:9027 + mm:2167:9029 — key visual and its scrim, top 1480px of the 1512 frame. */}
+      <div
+        aria-hidden
+        className="home-artwork pointer-events-none absolute inset-x-0 top-0 aspect-1512/1480 w-full"
+      />
+
+      <SiteHeader variant="full" activeHref="/" {...FIGMA_HEADER_PREVIEW} />
+
+      {/* mm:2167:9030 */}
+      <main className="relative mx-auto flex w-full max-w-[1512px] flex-1 flex-col items-center gap-20 px-6 py-16 md:px-16 lg:gap-30 lg:px-36 lg:py-24">
+        <HomeHero countdown={{ deadlineMs, initial }} />
+        <RootFurtherSection />
+        <AwardsSection />
+        <KudosSection />
       </main>
+
+      {/* No `activeHref`: the design's yellow-tinted footer link is the component's hover
+          state (I5001:14800;342:1411), not a persistent selection. */}
+      <SiteFooter variant="full" />
+
+      {/* mm:5022:15169 */}
+      <QuickActionWidget />
     </div>
   );
 }
