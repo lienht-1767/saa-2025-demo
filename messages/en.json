@@ -3,7 +3,26 @@
     "brandAlt": "Sun* Annual Awards 2025",
     "copyright": "Copyright Sun* © 2025",
     "languageLabel": "Language",
-    "chooseLanguage": "Choose a language"
+    "chooseLanguage": "Choose a language",
+    "primaryNavLabel": "Primary navigation",
+    "footerNavLabel": "Footer navigation",
+    "nav": {
+      "aboutSaa": "About SAA 2025",
+      "awardInformation": "Award Information",
+      "sunKudos": "Sun* Kudos",
+      "generalStandards": "General Standards"
+    },
+    "notifications": {
+      "label": "Notifications",
+      "labelWithCount": "Notifications, {count} unread",
+      "empty": "No notifications yet."
+    },
+    "account": {
+      "label": "Account",
+      "profile": "Profile",
+      "adminDashboard": "Admin Dashboard",
+      "signOut": "Sign out"
+    }
   },
   "login": {
     "title": "Sign in",
@@ -14,5 +33,147 @@
     "googleButton": "LOGIN With Google",
     "signingIn": "Signing in…",
     "error": "Sign-in failed. Please try again."
+  },
+  "home": {
+    "hero": {
+      "keyVisualAlt": "ROOT FURTHER",
+      "aboutAwards": "ABOUT AWARDS",
+      "aboutKudos": "ABOUT KUDOS"
+    },
+    "countdown": {
+      "comingSoon": "Comming soon",
+      "days": "DAYS",
+      "hours": "HOURS",
+      "minutes": "MINUTES",
+      "summary": "{days} days {hours} hours {minutes} minutes remaining"
+    },
+    "event": {
+      "timeLabel": "Time:",
+      "timeValue": "26/12/2025",
+      "venueLabel": "Venue:",
+      "venueValue": "Âu Cơ Art Center",
+      "broadcast": "Broadcast live via Livestream"
+    },
+    "rootFurther": {
+      "heading": "Root Further — the Sun* Annual Awards 2025 theme",
+      "intro": "Facing the breakneck pace of change in the AI era and ever-rising client expectations, Sun* has chosen a strategy of broadening capability — not merely striving to excel in our own field, but reaching for something higher: a place where every Sunner is a “problem-solver”, an expert at working through any obstacle and finding the answer to whatever a project, a client, or society sets before us.\nDrawing on that breadth of capability, on the ability to grow and adapt, and on the resolve to dig deep in order to break through in the age of AI, “Root Further” was chosen as the official theme of the Sun* Annual Awards 2025.\nBeyond its surface meaning, “Root Further” is the journey of reaching ever wider, rooting ever deeper, touching the hidden “strata” below in order to endure, to rise, and to keep alive the Sun* passion for creating value. Like roots driving relentlessly into the earth, pressing through layer after layer of “sediment” to draw up what is purest, Sunners too are absorbing nourishment from the times and from the trials of the market — renewing ourselves each day, widening our capability, and rooting ourselves firmly in the AI era: a wholly new stratum, complex and hard to read, yet dense with potential and opportunity.",
+      "quote": "“A tree with deep roots fears no storm”\n(English proverb)",
+      "outro": "When the storm comes, only the trees whose roots run deep hold their ground. An organisation of people who trust the range of their own abilities, who are ready to create and to meet a challenge, who take command of change — such an organisation does not merely withstand upheaval; it turns every advantage to account and masters what the moment demands. “Root Further” is not simply the title of a new chapter in how this organisation grows. It is an encouragement to each of us: dare to believe in yourself, dare to dig deep, dare to open up every last reserve of potential, dare to break your own limits, dare to become the most versatile and most accomplished version of yourself. Because in the age of AI, breadth of capability and the ability to harness the force of the times are the very conditions of lasting.\nNo one can say how many more hidden “strata” lie deep in the ground of the technology industry and today's market. We know only this: once “Root Further” has become the spirit at our roots, we will meet any uncharted ground on the road ahead not with fear, but with eagerness. Because we believe that within those very expanses lie wonders, and the chance to rise."
+    },
+    "awards": {
+      "caption": "Sun* annual awards 2025",
+      "title": "Award system",
+      "detail": "Details",
+      "items": {
+        "topTalent": {
+          "title": "Top Talent",
+          "description": "Honouring the top individuals who excel on every front"
+        },
+        "topProject": {
+          "title": "Top Project",
+          "description": "Honouring projects that excel on every front, including standout revenue"
+        },
+        "topProjectLeader": {
+          "title": "Top Project Leader",
+          "description": "Honouring the leader who inspires and drives a project to break through,"
+        },
+        "bestManager": {
+          "title": "Best Manager",
+          "description": "Honouring the manager who leads a team with real management strength"
+        },
+        "signatureCreator": {
+          "title": "Signature 2025 - Creator",
+          "description": "Honouring the manager who leads a team with real management strength"
+        },
+        "mvp": {
+          "title": "MVP (Most Valuable Person)",
+          "description": "Honouring the manager who leads a team with real management strength"
+        }
+      }
+    },
+    "kudos": {
+      "label": "Recognition movement",
+      "title": "Sun* Kudos",
+      "detail": "Details",
+      "logoAlt": "Sun* Kudos",
+      "body": "WHAT'S NEW IN SAA 2025\nAn activity for recognising and thanking colleagues — held for the first time, and open to every Sunner. Running from November 2025, it invites Sun* people to share their thanks and recognition for colleagues on the platform announced by the organising committee. What is shared there becomes material the Heads Council draws on when selecting the award recipients."
+    },
+    "widget": {
+      "label": "Quick actions",
+      "empty": "No actions available yet."
+    }
+  },
+  "kudosPage": {
+    "eyebrow": "Recognition movement",
+    "title": "Sun* Kudos",
+    "body": "NEW FOR SAA 2025\nA recognition and colleague-appreciation activity for every Sunner, running for the first time. Launching in November 2025, it encourages Sun* people to share recognition and thanks through the platform announced by the organising team. These messages will help the Heads Council select award recipients.",
+    "comingSoon": "The Kudos submission system is being completed."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This address does not exist or the page has moved.",
+    "backHome": "Back to home",
+    "viewAwards": "View the award system"
+  },
+  "awards": {
+    "page": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "SAA 2025 Award System"
+    },
+    "nav": {
+      "navLabel": "Award system navigation",
+      "topTalent": "Top Talent",
+      "topProject": "Top Project",
+      "topProjectLeader": "Top Project Leader",
+      "bestManager": "Best Manager",
+      "signatureCreator": "Signature 2025 Creator",
+      "mvp": "MVP"
+    },
+    "labels": {
+      "quantity": "Number of awards:",
+      "prize": "Prize value:",
+      "or": "Or"
+    },
+    "items": {
+      "topTalent": {
+        "title": "Top Talent",
+        "description": "The Top Talent award honours all-round outstanding individuals — people who consistently prove strong professional expertise and outstanding performance, deliver value beyond expectations, and are highly regarded by clients and teammates alike. Ready to take on whatever the organisation asks of them, they are a constant source of inspiration who drive motivation and a positive influence across the whole team.",
+        "quantity": { "count": "10", "unit": "Individual" },
+        "prize": { "primary": { "amount": "7.000.000 VNĐ", "note": "per award" } }
+      },
+      "topProject": {
+        "title": "Top Project",
+        "description": "The Top Project award honours outstanding project teams whose business results exceed expectations, whose operations run at peak efficiency, and who work with real dedication. These are technically complex projects that make excellent use of resources and cost, propose ideas of real value to clients, deliver outstanding profit, and earn positive client feedback. Their members hold strictly to internal development standards throughout the project, setting a model of excellence and professionalism.",
+        "quantity": { "count": "02", "unit": "Team" },
+        "prize": { "primary": { "amount": "15.000.000 VNĐ", "note": "per award" } }
+      },
+      "topProjectLeader": {
+        "title": "Top Project Leader",
+        "description": "The Top Project Leader award honours outstanding project managers — people who combine strong management ability with a powerful capacity to inspire, carrying an “Aim High – Be Agile” mindset into every problem and every context. Under their leadership, team members not only overcome challenges together and reach the goals set for them, but also keep their passion burning, hold on to the Wasshoi spirit, and grow into a finer, happier version of themselves.",
+        "quantity": { "count": "03", "unit": "Individual" },
+        "prize": { "primary": { "amount": "7.000.000 VNĐ", "note": "per award" } }
+      },
+      "bestManager": {
+        "title": "Best Manager",
+        "description": "The Best Manager award honours outstanding leaders who have guided their teams to results beyond expectations, with a marked impact on business performance and the organisation's sustainable growth. Under their leadership, the team consistently masters every goal through multitasking ability, effective coordination, and an agile, technology-driven mindset for the digital era. They inspire their teams to feel confident and energised, ready to embrace — and even lead — revolutionary change.",
+        "quantity": { "count": "01", "unit": "Individual" },
+        "prize": { "primary": { "amount": "10.000.000 VNĐ" } }
+      },
+      "signatureCreator": {
+        "title": "Signature 2025 - Creator",
+        "description": "The Signature award honours the individual or team who embodies the defining spirit Sun* aims for in each era.\n\nIn 2025, the Signature award honours the Creator — the individual or team with a proactive, sharp mindset who always sees opportunity within a challenge and takes the lead in acting on it. They are quick to sense a problem, quick to identify it and propose practical solutions, and they deliver clear value to a project, a client, or the organisation. With a builder's mindset and the “Creator” spirit that defines Sun*, they don't just respond positively to change — they actively drive improvement, helping to shape a new standard for how Sun* people create value.",
+        "quantity": { "count": "01", "unit": "Individual or team" },
+        "prize": {
+          "primary": { "amount": "5.000.000 VNĐ", "note": "for an individual award" },
+          "secondary": { "amount": "8.000.000 VNĐ", "note": "for a team award" }
+        }
+      },
+      "mvp": {
+        "title": "MVP (Most Valuable Person)",
+        "description": "The MVP award honours the single most outstanding individual of the year — a standout figure who represents the entire Sun* team. They have shown exceptional ability, unwavering dedication, and far-reaching influence, leaving a strong mark on Sun*'s journey over the past year.\n\nBeyond standing out for performance and results, they are also a spreading source of inspiration — through their thinking, their actions, and their positive influence on the team. The MVP embodies every quality of an outstanding Sun* person, while carrying a weighty responsibility: to stand as the representative model of Sun*'s people and spirit, helping lead the team toward new heights.",
+        "quantity": { "count": "01", "unit": "Individual" },
+        "prize": { "primary": { "amount": "15.000.000 VNĐ" } }
+      }
+    }
   }
 }

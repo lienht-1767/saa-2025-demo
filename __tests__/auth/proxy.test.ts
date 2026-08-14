@@ -66,10 +66,38 @@ describe("proxy route guard", () => {
   it("redirects a signed-out visitor off a protected route to /login", async () => {
     signedOut();
 
-    const response = await proxy(requestFor("/"));
+    const response = await proxy(requestFor("/profile"));
 
     expect(response.headers.get("location")).toBe("http://localhost:3000/login");
     expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
+  });
+
+  it("lets a signed-out visitor reach the public homepage without calling Supabase (AD05, TC ID-0)", async () => {
+    const response = await proxy(requestFor("/"));
+
+    expect(response.status).not.toBe(307);
+    expect(response.headers.get("location")).toBeNull();
+    expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
+    expect(getUser).not.toHaveBeenCalled();
+  });
+
+  // BR01 / TC ID-1. The award page carries prize amounts, so it is protected: a guest is turned
+  // away on the cookie check alone, before any Supabase round trip.
+  it("redirects a signed-out visitor off /awards to /login without calling Supabase (TC ID-1)", async () => {
+    signedOut();
+
+    const response = await proxy(requestFor("/awards"));
+
+    expect(response.headers.get("location")).toBe("http://localhost:3000/login");
+    expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
+  });
+
+  it("lets a signed-in user reach /awards (TC ID-0, ID-2)", async () => {
+    signedIn();
+
+    const response = await proxy(requestFor("/awards", true));
+
+    expect(response.headers.get("location")).toBeNull();
   });
 
   it("redirects a signed-in user away from /login (test case f62b0c97)", async () => {
@@ -83,7 +111,7 @@ describe("proxy route guard", () => {
   it("lets a signed-in user through to a protected route", async () => {
     signedIn();
 
-    const response = await proxy(requestFor("/", true));
+    const response = await proxy(requestFor("/profile", true));
 
     expect(response.headers.get("location")).toBeNull();
   });

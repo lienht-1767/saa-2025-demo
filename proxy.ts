@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { createSupabaseMiddlewareClient } from "@/lib/supabase/middleware-client";
 import { LOGIN_ROUTE, POST_LOGIN_ROUTE, isPublicRoute } from "@/lib/auth/routes";
+import { hasSupabaseAuthCookie, isSupabaseAuthCookie } from "@/lib/auth/session-cookie";
 
 export const AUTH_VALIDATION_TIMEOUT_MS = 2_000;
 
@@ -25,7 +26,7 @@ export async function proxy(request: NextRequest) {
 
   // A visitor without a session cookie cannot be authenticated. Avoid a network call on
   // public pages (especially /login) and fail closed immediately on protected routes.
-  if (!hasSupabaseAuthCookie(request)) {
+  if (!hasSupabaseAuthCookie(request.cookies.getAll().map(({ name }) => name))) {
     return isPublic
       ? fallbackResponse
       : redirectPreservingCookies(request, LOGIN_ROUTE, fallbackResponse);
@@ -99,15 +100,6 @@ function clearSupabaseAuthCookies(request: NextRequest, response: NextResponse) 
     request.cookies.delete(name);
     response.cookies.set(name, "", { maxAge: 0, path: "/" });
   }
-}
-
-/** Supabase stores the session in `sb-<project-ref>-auth-token` (possibly chunked). */
-function hasSupabaseAuthCookie(request: NextRequest): boolean {
-  return request.cookies.getAll().some(({ name }) => isSupabaseAuthCookie(name));
-}
-
-function isSupabaseAuthCookie(name: string): boolean {
-  return /^sb-.+-auth-token(?:\.\d+)?$/.test(name);
 }
 
 /**
