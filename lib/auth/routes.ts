@@ -6,6 +6,11 @@
  *
  * `/` is on the list by deliberate decision (AD05), not a relaxation of that principle: the
  * homepage renders for guests, with header chrome that adapts to session state elsewhere.
+ *
+ * `/awards` was on the list while it was a stub and has been withdrawn on purpose (BR01,
+ * TC ID-1): the award quantities and prize amounts it now carries are internal. The six award
+ * cards on the public homepage deep-link to `/awards#<slug>`, so a guest clicking one reaches
+ * `/login` — that is the intended boundary, not a broken link. See docs/system/permissions.md.
  */
 
 export const LOGIN_ROUTE = "/login";
@@ -22,7 +27,6 @@ export const PUBLIC_ROUTES = [
   LOGIN_ROUTE,
   AUTH_CALLBACK_ROUTE,
   HOME_ROUTE,
-  AWARDS_ROUTE,
   KUDOS_ROUTE,
 ] as const;
 

@@ -45,7 +45,7 @@ describe("homepage header controls", () => {
 
     await user.click(trigger);
     expect(trigger).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByRole("menu", { name: "Thông báo" })).toHaveAttribute(
+    expect(screen.getByRole("dialog", { name: "Thông báo" })).toHaveAttribute(
       "id",
       trigger.getAttribute("aria-controls"),
     );
@@ -53,8 +53,26 @@ describe("homepage header controls", () => {
     await user.tab();
     await user.keyboard("{Escape}");
 
-    await waitFor(() => expect(screen.queryByRole("menu")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     expect(trigger).toHaveFocus();
+  });
+
+  it("renders linked notifications as actions and informational rows as text", async () => {
+    const user = userEvent.setup();
+    render(
+      withMessages(
+        <NotificationBell
+          items={[
+            { id: "1", title: "First", href: "/awards" },
+            { id: "2", title: "Second" },
+          ]}
+        />,
+      ),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Thông báo" }));
+    expect(screen.getByRole("link", { name: "First" })).toHaveAttribute("href", "/awards");
+    expect(screen.getByText("Second").closest("[role=menuitem]")).toBeNull();
   });
 
   it("keeps the Figma 24px account glyph and applies role-aware menu entries", async () => {
@@ -69,6 +87,20 @@ describe("homepage header controls", () => {
     expect(screen.getByRole("menuitem", { name: "Trang cá nhân" })).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "Quản trị hệ thống" })).toBeInTheDocument();
     expect(screen.queryByRole("menuitem", { name: "Đăng xuất" })).not.toBeInTheDocument();
+  });
+
+  it("moves focus through the account menu with arrow keys", async () => {
+    const user = userEvent.setup();
+    render(withMessages(<AccountMenu isAdmin />));
+
+    await user.click(screen.getByRole("button", { name: "Tài khoản" }));
+    const profile = screen.getByRole("menuitem", { name: "Trang cá nhân" });
+    const admin = screen.getByRole("menuitem", { name: "Quản trị hệ thống" });
+    await waitFor(() => expect(profile).toHaveFocus());
+    await user.keyboard("{ArrowDown}");
+    expect(admin).toHaveFocus();
+    await user.keyboard("{ArrowDown}");
+    expect(profile).toHaveFocus();
   });
 
   it("renders auth-only controls only for an authenticated full header", async () => {

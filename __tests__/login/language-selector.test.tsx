@@ -119,4 +119,18 @@ describe("LanguageSelector", () => {
 
     expect(trigger).toHaveAttribute("aria-expanded", "true");
   });
+
+  it("moves focus through locale options with arrow keys", async () => {
+    const user = userEvent.setup();
+    renderSelector();
+
+    await user.click(screen.getByRole("button", { name: /Ngôn ngữ/ }));
+    const vietnamese = screen.getByRole("menuitemradio", { name: /Tiếng Việt/ });
+    const english = screen.getByRole("menuitemradio", { name: /English/ });
+    await waitFor(() => expect(vietnamese).toHaveFocus());
+    await user.keyboard("{ArrowDown}");
+    expect(english).toHaveFocus();
+    await user.keyboard("{ArrowDown}");
+    expect(vietnamese).toHaveFocus();
+  });
 });

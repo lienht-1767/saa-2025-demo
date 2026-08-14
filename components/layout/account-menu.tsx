@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { IconUser } from "@/components/ui/icons";
 import { ACCOUNT_LINKS } from "@/lib/home/navigation";
 import { useDismissOnOutside } from "@/lib/hooks/use-dismiss-on-outside";
+import { useMenuKeyboardNavigation } from "@/lib/hooks/use-menu-keyboard-navigation";
 
 /**
  * `mms_A1.8_Button-IC` (I2167:9091;186:1597).
@@ -35,21 +36,13 @@ export function AccountMenu({ isAdmin = false, displayName, onSignOut }: Account
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const menuId = useId();
   const close = useCallback(() => setOpen(false), []);
 
   useDismissOnOutside(open, containerRef, close);
 
-  useEffect(() => {
-    if (!open) return;
-
-    function restoreFocusOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") triggerRef.current?.focus();
-    }
-
-    document.addEventListener("keydown", restoreFocusOnEscape);
-    return () => document.removeEventListener("keydown", restoreFocusOnEscape);
-  }, [open]);
+  const handleMenuKeyDown = useMenuKeyboardNavigation(open, menuRef, triggerRef, close);
 
   return (
     <div ref={containerRef} className="relative shrink-0">
@@ -69,9 +62,11 @@ export function AccountMenu({ isAdmin = false, displayName, onSignOut }: Account
 
       {open && (
         <ul
+          ref={menuRef}
           id={menuId}
           role="menu"
           aria-label={t("label")}
+          onKeyDown={handleMenuKeyDown}
           className="absolute right-0 z-50 mt-2 min-w-52 overflow-hidden rounded-lg bg-surface-dark py-1 shadow-lg ring-1 ring-white/15"
         >
           {displayName && (

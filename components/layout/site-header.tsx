@@ -28,6 +28,10 @@ export type SiteHeaderProps = {
   notifications?: readonly NotificationItem[];
   /** `href` of the nav link to paint in the selected state. */
   activeHref?: string;
+  /** Awards reference uses an opaque #0D1318 bar rather than artwork showing through. */
+  surface?: "overlay" | "solid";
+  displayName?: string;
+  onSignOut?: () => void | Promise<void>;
 };
 
 export async function SiteHeader({
@@ -37,6 +41,9 @@ export async function SiteHeader({
   unreadNotificationCount = 0,
   notifications,
   activeHref,
+  surface = "overlay",
+  displayName,
+  onSignOut,
 }: SiteHeaderProps = {}) {
   const t = await getTranslations("common");
   const isFull = variant === "full";
@@ -44,7 +51,13 @@ export async function SiteHeader({
   return (
     /* mm:2167:9091 */
     <header
-      className={`sticky top-0 z-40 w-full ${isFull ? "bg-surface-header/80" : "h-20 bg-surface-dark/80"}`}
+      className={`sticky top-0 z-40 w-full ${
+        isFull
+          ? surface === "solid"
+            ? "bg-awards-header"
+            : "bg-surface-header/80"
+          : "h-20 bg-surface-dark/80"
+      }`}
     >
       <div
         className={`flex w-full items-center justify-between gap-2 px-6 py-3 sm:gap-4 md:px-16 lg:px-36 ${
@@ -83,7 +96,9 @@ export async function SiteHeader({
             <NotificationBell unreadCount={unreadNotificationCount} items={notifications} />
           )}
           <LanguageSelector />
-          {isFull && isAuthenticated && <AccountMenu isAdmin={isAdmin} />}
+          {isFull && isAuthenticated && (
+            <AccountMenu isAdmin={isAdmin} displayName={displayName} onSignOut={onSignOut} />
+          )}
         </div>
       </div>
 

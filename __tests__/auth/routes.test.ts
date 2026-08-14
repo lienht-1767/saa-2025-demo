@@ -22,8 +22,9 @@ describe("route constants", () => {
     expect(POST_LOGIN_ROUTE).toBe("/");
   });
 
-  it("whitelists exactly the five public routes (AD05 opens /)", () => {
-    expect([...PUBLIC_ROUTES]).toEqual(["/login", "/auth/callback", "/", "/awards", "/kudos"]);
+  // `/awards` was withdrawn from this list when the page stopped being a stub — BR01/TC ID-1.
+  it("whitelists exactly the four public routes (AD05 opens /, BR01 closes /awards)", () => {
+    expect([...PUBLIC_ROUTES]).toEqual(["/login", "/auth/callback", "/", "/kudos"]);
   });
 });
 
@@ -32,8 +33,6 @@ describe("isPublicRoute", () => {
     expect(isPublicRoute("/login")).toBe(true);
     expect(isPublicRoute("/auth/callback")).toBe(true);
     expect(isPublicRoute("/auth/callback/extra")).toBe(true);
-    expect(isPublicRoute("/awards")).toBe(true);
-    expect(isPublicRoute("/awards/2025")).toBe(true);
     expect(isPublicRoute("/kudos")).toBe(true);
   });
 
@@ -63,5 +62,9 @@ describe("isPublicRoute", () => {
     expect(isPublicRoute("/auth")).toBe(false);
     expect(isPublicRoute("/loginsomething")).toBe(false);
     expect(isPublicRoute("/awardsomething")).toBe(false);
+    // BR01 / TC ID-1 — the award page and its sub-paths require a session. These two lines
+    // asserted `true` while /awards was a public stub; they were flipped, not dropped.
+    expect(isPublicRoute("/awards")).toBe(false);
+    expect(isPublicRoute("/awards/2025")).toBe(false);
   });
 });

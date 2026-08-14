@@ -16,7 +16,9 @@ import { HEADER_NAV_LINKS } from "@/lib/home/navigation";
  *   D2.1   the "Chi tiết" button, 126x56, 4px radius, #FFEA9E fill
  * `MM_MEDIA_Logo/Kudos` (I3390:10349;329:2948) is the 364x72 KUDOS wordmark on the right.
  */
-export function KudosSection() {
+export type KudosSectionProps = { variant?: "home" | "awards" };
+
+export function KudosSection({ variant = "home" }: KudosSectionProps = {}) {
   const t = useTranslations("home.kudos");
   // One Figma TEXT node, newline-separated — mirrored in the catalogue and split here.
   const body = t("body").split("\n");
@@ -26,7 +28,11 @@ export function KudosSection() {
     /* mm:3390:10349 */
     <section id="kudos" aria-labelledby="kudos-heading" className="flex w-full justify-center">
       {/* mm:I3390:10349;313:8415 */}
-      <div className="relative w-full max-w-[1120px] overflow-hidden rounded-2xl bg-kudos-surface">
+      <div
+        className={`relative w-full overflow-hidden rounded-2xl bg-kudos-surface ${
+          variant === "awards" ? "max-w-[1152px]" : "max-w-[1120px]"
+        }`}
+      >
         <Image
           src="/images/home/kudos-background.webp"
           alt=""
@@ -36,7 +42,7 @@ export function KudosSection() {
           className="absolute inset-0 size-full object-cover"
         />
 
-        <div className="relative flex flex-col gap-10 p-8 sm:p-12 lg:flex-row lg:items-center lg:gap-8 lg:p-16">
+        <div className="relative flex min-h-[500px] flex-col gap-10 p-8 sm:p-12 lg:flex-row lg:items-center lg:gap-8 lg:p-16">
           {/* mm:I3390:10349;313:8419 */}
           <div className="flex max-w-[457px] flex-col items-start gap-8">
             {/* mm:I3390:10349;313:8420 */}

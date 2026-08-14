@@ -7,7 +7,8 @@
   /* Design tokens measured from the MoMorph login frame (662:14387) */
   --brand-yellow: #ffea9e;
   --surface-dark: #0b0f12; /* header overlay, painted at 80% over the key visual */
-  --canvas: #01101a; /* key visual base colour, sampled from the Figma render */
+  --canvas: #00101a; /* awards/home canvas, measured from the Figma render */
+  --awards-header: #0d1318; /* opaque /awards header — frame 313:8436 */
   --divider: #2e3940; /* footer border-top */
 
   /* Design tokens measured from the MoMorph Homepage SAA frame (2167:9026) */
@@ -25,6 +26,7 @@
   --color-brand-yellow: var(--brand-yellow);
   --color-surface-dark: var(--surface-dark);
   --color-canvas: var(--canvas);
+  --color-awards-header: var(--awards-header);
   --color-divider: var(--divider);
   --color-surface-header: var(--surface-header);
   --color-accent-border: var(--accent-border);
@@ -72,6 +74,38 @@
   background-size:
     100% 100%,
     100% auto;
+}
+
+/*
+ * `/awards` key visual — `Cover` (313:8439) + `mms_3_Keyvisual` (313:8437). Same dark-fading
+ * language as `.home-artwork`, but the decorative area here only spans the header and title
+ * block (Cover measures 1440x627, versus the homepage's full 1480px), so it gets its own
+ * shorter class instead of a size override on the shared one. MoMorph reports this screen's
+ * keyvisual as a pan/crop of a much larger shared background (`background-size: 367%`) that
+ * isn't exportable as a standalone asset for a non-`MM_MEDIA_*` node — this reuses
+ * `keyvisual-bg.webp` with the Figma-reported scrim gradient, keeping the same visual language
+ * without fabricating a crop MoMorph couldn't confirm.
+ */
+.awards-artwork {
+  background-color: var(--canvas);
+  background-image:
+    linear-gradient(0deg, #00101a -4.23%, rgba(0, 19, 32, 0) 52.79%),
+    url("/images/home/keyvisual-bg.webp");
+  background-repeat: no-repeat, no-repeat;
+  background-position:
+    center,
+    top center;
+  background-size:
+    100% 100%,
+    100% auto;
+}
+
+@media (min-width: 80rem) {
+  .awards-artwork {
+    background-position:
+      center,
+      center 63%;
+  }
 }
 
 /*

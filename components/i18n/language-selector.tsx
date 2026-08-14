@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { setLocale } from "@/lib/i18n/actions";
 import { LOCALE_LABELS, SUPPORTED_LOCALES, type Locale } from "@/lib/i18n/config";
+import { useMenuKeyboardNavigation } from "@/lib/hooks/use-menu-keyboard-navigation";
 
 /**
  * Header language switcher — flag + code + chevron, opening a menu of the supported locales.
@@ -20,6 +21,10 @@ export function LanguageSelector() {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
+  const close = useCallback(() => setOpen(false), []);
+  const handleMenuKeyDown = useMenuKeyboardNavigation(open, menuRef, triggerRef, close);
 
   useEffect(() => {
     if (!open) return;
@@ -30,16 +35,10 @@ export function LanguageSelector() {
       }
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-
     document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
 
@@ -57,6 +56,7 @@ export function LanguageSelector() {
   return (
     <div ref={containerRef} className="relative h-14 w-[108px] shrink-0">
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
         disabled={isPending}
@@ -79,8 +79,10 @@ export function LanguageSelector() {
 
       {open && (
         <ul
+          ref={menuRef}
           role="menu"
           aria-label={t("chooseLanguage")}
+          onKeyDown={handleMenuKeyDown}
           className="absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-lg bg-surface-dark py-1 shadow-lg ring-1 ring-white/15"
         >
           {SUPPORTED_LOCALES.map((locale) => {

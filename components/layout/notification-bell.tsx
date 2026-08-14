@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -22,6 +23,8 @@ export type NotificationItem = {
   /** Pre-formatted, locale-aware timestamp — this component does no date maths. */
   timestamp?: string;
   read?: boolean;
+  /** Safe internal destination; absent notifications remain informational list items. */
+  href?: string;
 };
 
 export type NotificationBellProps = {
@@ -35,6 +38,7 @@ export function NotificationBell({ unreadCount = 0, items = [] }: NotificationBe
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
   const close = useCallback(() => setOpen(false), []);
 
@@ -42,14 +46,18 @@ export function NotificationBell({ unreadCount = 0, items = [] }: NotificationBe
 
   useEffect(() => {
     if (!open) return;
+    panelRef.current?.focus();
 
-    function restoreFocusOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") triggerRef.current?.focus();
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      close();
+      triggerRef.current?.focus();
     }
 
-    document.addEventListener("keydown", restoreFocusOnEscape);
-    return () => document.removeEventListener("keydown", restoreFocusOnEscape);
-  }, [open]);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [close, open]);
 
   const hasUnread = unreadCount > 0;
 
@@ -60,7 +68,7 @@ export function NotificationBell({ unreadCount = 0, items = [] }: NotificationBe
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-haspopup="menu"
+        aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={open ? menuId : undefined}
         aria-label={hasUnread ? t("labelWithCount", { count: unreadCount }) : t("label")}
@@ -79,8 +87,10 @@ export function NotificationBell({ unreadCount = 0, items = [] }: NotificationBe
 
       {open && (
         <div
+          ref={panelRef}
           id={menuId}
-          role="menu"
+          role="dialog"
+          tabIndex={-1}
           aria-label={t("label")}
           className="absolute right-0 z-50 mt-2 w-80 max-w-[calc(100vw-2rem)] overflow-hidden rounded-lg bg-surface-dark py-2 shadow-lg ring-1 ring-white/15"
         >
@@ -89,15 +99,22 @@ export function NotificationBell({ unreadCount = 0, items = [] }: NotificationBe
           ) : (
             <ul>
               {items.map((item) => (
-                <li key={item.id} role="none">
-                  <div
-                    role="menuitem"
-                    tabIndex={0}
-                    className="flex flex-col gap-1 px-4 py-3 text-left text-sm text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-yellow"
-                  >
-                    <span className={item.read ? "font-normal" : "font-bold"}>{item.title}</span>
-                    {item.timestamp && <span className="text-xs text-white/60">{item.timestamp}</span>}
-                  </div>
+                <li key={item.id}>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      onClick={close}
+                      className="flex flex-col gap-1 px-4 py-3 text-left text-sm text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-yellow"
+                    >
+                      <span className={item.read ? "font-normal" : "font-bold"}>{item.title}</span>
+                      {item.timestamp && <span className="text-xs text-white/60">{item.timestamp}</span>}
+                    </Link>
+                  ) : (
+                    <div className="flex flex-col gap-1 px-4 py-3 text-left text-sm text-white">
+                      <span className={item.read ? "font-normal" : "font-bold"}>{item.title}</span>
+                      {item.timestamp && <span className="text-xs text-white/60">{item.timestamp}</span>}
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
