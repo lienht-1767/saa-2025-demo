@@ -18,6 +18,7 @@ export const AUTH_CALLBACK_ROUTE = "/auth/callback";
 export const HOME_ROUTE = "/";
 export const AWARDS_ROUTE = "/awards";
 export const KUDOS_ROUTE = "/kudos";
+export const COUNTDOWN_ROUTE = "/countdown";
 
 /** Where a signed-in user lands. A module constant, never a query parameter — that would
  *  turn the callback into an open redirect. */
@@ -28,6 +29,7 @@ export const PUBLIC_ROUTES = [
   AUTH_CALLBACK_ROUTE,
   HOME_ROUTE,
   KUDOS_ROUTE,
+  COUNTDOWN_ROUTE,
 ] as const;
 
 export function isPublicRoute(pathname: string): boolean {

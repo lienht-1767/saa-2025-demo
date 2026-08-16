@@ -109,13 +109,23 @@
 }
 
 /*
- * Countdown digits — `Group 5`/`Group 4` (I2167:9040;186:2617) are set in "Digital Numbers"
- * at 49.152px. That face is not a Google font and ships with no web licence in this repo, so
- * the family is named first and a tabular Montserrat/monospace stack carries the fallback.
+ * Countdown digits — the Figma-only "Digital Numbers" face has no distributable asset. The
+ * root layout self-hosts the spec-approved DSEG7 Classic equivalent under OFL-1.1.
  */
 .countdown-digit {
-  font-family: "Digital Numbers", var(--font-montserrat), ui-monospace, monospace;
+  font-family: var(--font-digital-numbers), var(--font-montserrat), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
+}
+
+/* `Cover` (2268:35130) on the standalone countdown page. Kept separate from the image so the
+   exact 18deg Figma gradient scales cleanly at every viewport size. */
+.countdown-prelaunch-cover {
+  background: linear-gradient(
+    18deg,
+    #00101a 15.48%,
+    rgba(0, 18, 29, 0.46) 52.13%,
+    rgba(0, 19, 32, 0) 63.41%
+  );
 }
 
 @media (prefers-color-scheme: dark) {
