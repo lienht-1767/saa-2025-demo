@@ -34,6 +34,14 @@
     "signingIn": "Signing in…",
     "error": "Sign-in failed. Please try again."
   },
+  "countdownPage": {
+    "title": "The event will begin in",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "summary": "{days} days {hours} hours {minutes} minutes remaining",
+    "comingSoon": "Coming soon"
+  },
   "home": {
     "hero": {
       "keyVisualAlt": "ROOT FURTHER",

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   AUTH_CALLBACK_ROUTE,
   AWARDS_ROUTE,
+  COUNTDOWN_ROUTE,
   HOME_ROUTE,
   KUDOS_ROUTE,
   LOGIN_ROUTE,
@@ -18,13 +19,14 @@ describe("route constants", () => {
     expect(HOME_ROUTE).toBe("/");
     expect(AWARDS_ROUTE).toBe("/awards");
     expect(KUDOS_ROUTE).toBe("/kudos");
+    expect(COUNTDOWN_ROUTE).toBe("/countdown");
     // AD04: the design says /todo, the project decided on / — see clarifications.md.
     expect(POST_LOGIN_ROUTE).toBe("/");
   });
 
   // `/awards` was withdrawn from this list when the page stopped being a stub — BR01/TC ID-1.
-  it("whitelists exactly the four public routes (AD05 opens /, BR01 closes /awards)", () => {
-    expect([...PUBLIC_ROUTES]).toEqual(["/login", "/auth/callback", "/", "/kudos"]);
+  it("whitelists the public routes (AD05 opens /, BR01 closes /awards)", () => {
+    expect([...PUBLIC_ROUTES]).toEqual(["/login", "/auth/callback", "/", "/kudos", "/countdown"]);
   });
 });
 
@@ -34,6 +36,7 @@ describe("isPublicRoute", () => {
     expect(isPublicRoute("/auth/callback")).toBe(true);
     expect(isPublicRoute("/auth/callback/extra")).toBe(true);
     expect(isPublicRoute("/kudos")).toBe(true);
+    expect(isPublicRoute("/countdown")).toBe(true);
   });
 
   // "/" must stay an EXACT match — `"/profile".startsWith("//")` is false, so adding "/" to the

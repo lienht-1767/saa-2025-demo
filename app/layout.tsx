@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
@@ -20,6 +21,15 @@ const montserratAlternates = Montserrat_Alternates({
   weight: ["700"],
 });
 
+// The source design uses the unavailable proprietary face "Digital Numbers". DSEG7 Classic is
+// the spec-approved LCD equivalent and ships under OFL-1.1; next/font emits only this 5 KB WOFF2.
+const digitalNumbers = localFont({
+  src: "../node_modules/dseg/fonts/DSEG7-Classic/DSEG7Classic-Regular.woff2",
+  variable: "--font-digital-numbers",
+  display: "swap",
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Sun* Annual Awards 2025",
   description: "SAA 2025 — Root Further",
@@ -32,7 +42,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={locale}
-      className={`${montserrat.variable} ${montserratAlternates.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${montserratAlternates.variable} ${digitalNumbers.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>

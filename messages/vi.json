@@ -34,6 +34,14 @@
     "signingIn": "Đang đăng nhập…",
     "error": "Đăng nhập không thành công. Vui lòng thử lại."
   },
+  "countdownPage": {
+    "title": "Sự kiện sẽ bắt đầu sau",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "summary": "Còn {days} ngày {hours} giờ {minutes} phút",
+    "comingSoon": "Sự kiện sắp diễn ra"
+  },
   "home": {
     "hero": {
       "keyVisualAlt": "ROOT FURTHER",

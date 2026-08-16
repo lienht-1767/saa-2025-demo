@@ -37,10 +37,13 @@ describe("proxy route guard", () => {
     getUser.mockReset();
     createSupabaseMiddlewareClient.mockClear();
     vi.spyOn(console, "error").mockImplementation(() => {});
+    // Most auth tests exercise the live-site route table. Individual prelaunch cases override it.
+    vi.stubEnv("NEXT_PUBLIC_EVENT_START_AT", "2020-01-01T00:00:00+07:00");
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    vi.unstubAllEnvs();
     vi.restoreAllMocks();
   });
 
@@ -79,6 +82,31 @@ describe("proxy route guard", () => {
     expect(response.headers.get("location")).toBeNull();
     expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
     expect(getUser).not.toHaveBeenCalled();
+  });
+
+  it("redirects a signed-out visitor from / to /countdown before the event", async () => {
+    vi.stubEnv("NEXT_PUBLIC_EVENT_START_AT", "2030-01-01T00:00:00+07:00");
+
+    const response = await proxy(requestFor("/"));
+
+    expect(response.headers.get("location")).toBe("http://localhost:3000/countdown");
+    expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
+  });
+
+  it("lets a signed-out visitor reach the public countdown page before the event", async () => {
+    vi.stubEnv("NEXT_PUBLIC_EVENT_START_AT", "2030-01-01T00:00:00+07:00");
+
+    const response = await proxy(requestFor("/countdown"));
+
+    expect(response.headers.get("location")).toBeNull();
+    expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
+  });
+
+  it("redirects a stale countdown URL to the homepage once the event has started", async () => {
+    const response = await proxy(requestFor("/countdown"));
+
+    expect(response.headers.get("location")).toBe("http://localhost:3000/");
+    expect(createSupabaseMiddlewareClient).not.toHaveBeenCalled();
   });
 
   // BR01 / TC ID-1. The award page carries prize amounts, so it is protected: a guest is turned

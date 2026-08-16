@@ -1,8 +1,16 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { createSupabaseMiddlewareClient } from "@/lib/supabase/middleware-client";
-import { LOGIN_ROUTE, POST_LOGIN_ROUTE, isPublicRoute } from "@/lib/auth/routes";
+import {
+  COUNTDOWN_ROUTE,
+  HOME_ROUTE,
+  LOGIN_ROUTE,
+  POST_LOGIN_ROUTE,
+  isPublicRoute,
+} from "@/lib/auth/routes";
 import { hasSupabaseAuthCookie, isSupabaseAuthCookie } from "@/lib/auth/session-cookie";
+import { resolvePrelaunchRedirect } from "@/lib/countdown/prelaunch-route";
+import { resolveEventStart } from "@/lib/home/countdown";
 
 export const AUTH_VALIDATION_TIMEOUT_MS = 2_000;
 
@@ -23,6 +31,16 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isPublic = isPublicRoute(pathname);
   const fallbackResponse = NextResponse.next({ request });
+
+  // The prelaunch frame intentionally has no navigation. Before the event, `/` is therefore a
+  // gateway to `/countdown`; at and after the deadline, the inverse redirect makes the homepage
+  // canonical. Only resolve the date for these two routes so unrelated requests stay untouched.
+  if (pathname === HOME_ROUTE || pathname === COUNTDOWN_ROUTE) {
+    const destination = resolvePrelaunchRedirect(pathname, resolveEventStart(), Date.now());
+    if (destination) {
+      return redirectPreservingCookies(request, destination, fallbackResponse);
+    }
+  }
 
   // A visitor without a session cookie cannot be authenticated. Avoid a network call on
   // public pages (especially /login) and fail closed immediately on protected routes.
