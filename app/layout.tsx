@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { getLocale } from "@/lib/i18n/locale";
 import "./globals.css";
@@ -30,10 +30,15 @@ const digitalNumbers = localFont({
   weight: "400",
 });
 
-export const metadata: Metadata = {
-  title: "Sun* Annual Awards 2025",
-  description: "SAA 2025 — Root Further",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata.site");
+  const title = t("title");
+
+  return {
+    title: { default: title, template: `%s | ${title}` },
+    description: t("description"),
+  };
+}
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const locale = await getLocale();

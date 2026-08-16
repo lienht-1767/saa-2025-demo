@@ -1,4 +1,22 @@
 {
+  "metadata": {
+    "site": {
+      "title": "Sun* Annual Awards 2025",
+      "description": "The official site for Sun* Annual Awards 2025 — Root Further."
+    },
+    "countdown": {
+      "title": "Countdown",
+      "description": "Count down to the start of Sun* Annual Awards 2025."
+    },
+    "awards": {
+      "title": "Award System",
+      "description": "Explore the Sun* Annual Awards 2025 award system."
+    },
+    "kudos": {
+      "title": "Sun* Kudos",
+      "description": "Discover the SAA 2025 colleague recognition and appreciation activity."
+    }
+  },
   "common": {
     "brandAlt": "Sun* Annual Awards 2025",
     "copyright": "Copyright Sun* © 2025",

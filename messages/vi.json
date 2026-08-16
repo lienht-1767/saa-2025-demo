@@ -1,4 +1,22 @@
 {
+  "metadata": {
+    "site": {
+      "title": "Sun* Annual Awards 2025",
+      "description": "Trang thông tin chính thức của Sun* Annual Awards 2025 — Root Further."
+    },
+    "countdown": {
+      "title": "Đếm ngược",
+      "description": "Đếm ngược đến thời điểm bắt đầu Sun* Annual Awards 2025."
+    },
+    "awards": {
+      "title": "Hệ thống giải thưởng",
+      "description": "Khám phá hệ thống giải thưởng của Sun* Annual Awards 2025."
+    },
+    "kudos": {
+      "title": "Sun* Kudos",
+      "description": "Tìm hiểu hoạt động ghi nhận và cảm ơn đồng nghiệp tại SAA 2025."
+    }
+  },
   "common": {
     "brandAlt": "Sun* Annual Awards 2025",
     "copyright": "Bản quyền thuộc về Sun* © 2025",

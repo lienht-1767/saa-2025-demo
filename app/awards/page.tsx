@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 import { AwardsList } from "@/components/awards/awards-list";
 import { AwardsNav } from "@/components/awards/awards-nav";
@@ -9,6 +11,12 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { AWARD_ROWS } from "@/lib/awards/award-rows";
 import { signOutAction } from "@/lib/auth/sign-out-action";
 import { getHeaderSession } from "@/lib/layout/header-session";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata.awards");
+
+  return { title: t("title"), description: t("description") };
+}
 
 /**
  * SCR-awards — MoMorph screen zFYDgyj_pD (Figma 313:8436, "Hệ thống giải thưởng").
