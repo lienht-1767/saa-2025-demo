@@ -11,6 +11,7 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "supabase/.temp/**",
     "next-env.d.ts",
     // Agent tooling: CommonJS hook scripts that are not part of the app build and do not
     // follow the Next.js/TypeScript rules this config enforces.

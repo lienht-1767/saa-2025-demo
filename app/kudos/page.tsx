@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
@@ -5,6 +6,12 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { signOutAction } from "@/lib/auth/sign-out-action";
 import { getHeaderSession } from "@/lib/layout/header-session";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata.kudos");
+
+  return { title: t("title"), description: t("description") };
+}
 
 export default async function KudosPage() {
   const [t, headerSession] = await Promise.all([

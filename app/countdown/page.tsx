@@ -7,9 +7,11 @@ import { getTranslations } from "next-intl/server";
 import { PrelaunchCountdownLive } from "@/components/countdown/countdown-live";
 import { computeCountdown, resolveEventStart } from "@/lib/home/countdown";
 
-export const metadata: Metadata = {
-  title: "Countdown | Sun* Annual Awards 2025",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata.countdown");
+
+  return { title: t("title"), description: t("description") };
+}
 
 /** SCR-countdown — Figma 2268:35127, "Countdown - Prelaunch page". */
 export default async function CountdownPage() {
