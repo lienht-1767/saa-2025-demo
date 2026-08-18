@@ -15,6 +15,14 @@ import type { KudosHighlightCard as KudosHighlightCardData } from "@/lib/kudos/t
  * faded treatment below (`opacity`, no border, `pointer-events-none`) is this repo's own
  * reasonable rendering of that state description, not read off the design.
  */
+/**
+ * Minimal typography for the rich-text markup `sanitizeKudosHtml` allows through (b/i/s, ol/li,
+ * a, blockquote): list markers visible, quote indented, link underlined — legible inside the
+ * cream card without touching the shared stylesheet (Track A owns `app/globals.css`).
+ */
+const KUDOS_RICH_TEXT_CLASSES =
+  "[&_ol]:list-decimal [&_ol]:pl-6 [&_li]:ml-1 [&_blockquote]:border-l-4 [&_blockquote]:border-ink/30 [&_blockquote]:pl-3 [&_blockquote]:italic [&_a]:underline [&_a]:text-ink break-words";
+
 export type KudosHighlightCardProps = {
   card: KudosHighlightCardData;
   isActive: boolean;
@@ -45,7 +53,9 @@ export function KudosHighlightCard({
       }`}
     >
       <div className="flex w-full items-start justify-between gap-6">
-        <KudosPersonBlock person={card.sender} onOpenProfile={isActive ? onOpenProfile : undefined} />
+        {/* An anonymous sender maps to a `sender.id === ""` sentinel (map-board-data.ts) — no
+            real profile to link to, so onOpenProfile is withheld for that block only. */}
+        <KudosPersonBlock person={card.sender} onOpenProfile={isActive && card.sender.id ? onOpenProfile : undefined} />
         <IconArrowDetail aria-hidden className="mt-12 size-8 shrink-0 text-ink" />
         <KudosPersonBlock person={card.receiver} onOpenProfile={isActive ? onOpenProfile : undefined} />
       </div>
@@ -53,7 +63,12 @@ export function KudosHighlightCard({
       <div className="flex w-full flex-col gap-4">
         <p className="text-base leading-6 font-bold tracking-[0.5px] text-kudos-muted">{formatPostTime(card.postedAt)}</p>
         <div className="w-full rounded-xl border border-brand-yellow bg-brand-yellow/40 px-6 py-4">
-          <p className="line-clamp-3 text-xl leading-8 font-bold text-justify text-ink">{card.content}</p>
+          {/* card.contentHtml is sanitized in this request by map-board-data.ts's
+              `sanitizeKudosHtml` — never a raw column, never client-supplied. */}
+          <div
+            className={`${KUDOS_RICH_TEXT_CLASSES} line-clamp-3 text-xl leading-8 font-bold text-justify text-ink`}
+            dangerouslySetInnerHTML={{ __html: card.contentHtml }}
+          />
         </div>
         <KudosHashtagRow hashtags={card.hashtags} onSelectHashtag={isActive ? onSelectHashtag : undefined} />
       </div>

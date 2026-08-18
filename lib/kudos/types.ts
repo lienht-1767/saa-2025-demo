@@ -29,7 +29,8 @@ export type KudosHighlightCard = {
   receiver: KudosPersonRef;
   /** ISO 8601 timestamp; formatted for display via `lib/kudos/format-post-time.ts`. */
   postedAt: string;
-  content: string;
+  /** Sanitized rich-text HTML (`sanitizeKudosHtml`) — render with `dangerouslySetInnerHTML` only. */
+  contentHtml: string;
   hashtags: string[];
   likeCount: number;
   likedByViewer: boolean;
@@ -45,9 +46,10 @@ export type KudosFeedPost = {
   sender: KudosPersonRef;
   receiver: KudosPersonRef;
   postedAt: string;
-  /** Short badge line above the content, e.g. "IDOL GIỚI TRẺ". `null` when the post carries none. */
+  /** Short badge line above the content, sourced from `kudos.title` ("Danh hiệu"). `null` when the post carries none. */
   tagLine: string | null;
-  content: string;
+  /** Sanitized rich-text HTML (`sanitizeKudosHtml`) — render with `dangerouslySetInnerHTML` only. */
+  contentHtml: string;
   attachments: KudosFeedAttachment[];
   hashtags: string[];
   likeCount: number;

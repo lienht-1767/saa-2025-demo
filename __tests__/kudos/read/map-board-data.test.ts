@@ -8,6 +8,7 @@ import type {
   SpotlightTickerRow,
 } from "@/lib/kudos/read/db-row-types";
 import {
+  toAnonymousPersonRef,
   toFeedPost,
   toHighlightCard,
   toPersonRef,
@@ -45,6 +46,9 @@ function buildHighlightRow(overrides: Partial<KudosHighlightRow> = {}): KudosHig
       { hashtag_id: "h1", hashtag: { name: "Dedicated" } },
       { hashtag_id: "h2", hashtag: { name: "TeamSpirit" } },
     ],
+    title: null,
+    is_anonymous: false,
+    anonymous_name: null,
     ...overrides,
   };
 }
@@ -84,7 +88,7 @@ describe("toHighlightCard", () => {
       sender: toPersonRef(senderRow),
       receiver: toPersonRef(recipientRow),
       postedAt: "2026-01-01T10:00:00.000Z",
-      content: row.message,
+      contentHtml: row.message,
       hashtags: ["Dedicated", "TeamSpirit"],
       likeCount: 42,
       likedByViewer: true,
@@ -94,12 +98,40 @@ describe("toHighlightCard", () => {
   it("is false for likedByViewer when the card's id is absent from the set", () => {
     expect(toHighlightCard(buildHighlightRow(), new Set())).toMatchObject({ likedByViewer: false });
   });
+
+  it("sanitizes the message so a <script> tag never survives into contentHtml", () => {
+    const row = buildHighlightRow({ message: "hi <script>alert(1)</script> there" });
+
+    expect(toHighlightCard(row, new Set()).contentHtml).not.toContain("<script>");
+  });
+
+  it("uses the anonymous sender ref, with no avatar, when is_anonymous is true", () => {
+    const row = buildHighlightRow({ is_anonymous: true, anonymous_name: "Người bí ẩn" });
+
+    const card = toHighlightCard(row, new Set());
+
+    expect(card.sender).toEqual({ id: "", name: "Người bí ẩn", department: "", avatarUrl: null, kudosCount: 0 });
+    expect(card.receiver).toEqual(toPersonRef(recipientRow));
+  });
+});
+
+describe("toAnonymousPersonRef", () => {
+  it("falls back to the generic Sunner name when anonymous_name is null or blank", () => {
+    expect(toAnonymousPersonRef(null).name).toBe("Sunner");
+    expect(toAnonymousPersonRef("  ").name).toBe("Sunner");
+  });
+
+  it("has no avatar and no id (no profile to link)", () => {
+    const ref = toAnonymousPersonRef("Ẩn danh");
+    expect(ref.avatarUrl).toBeNull();
+    expect(ref.id).toBe("");
+  });
 });
 
 describe("toFeedPost", () => {
-  it("sorts attachments by position and always sets tagLine to null", () => {
+  it("sorts attachments by position and sets tagLine from the row's title", () => {
     const row: KudosFeedRow = {
-      ...buildHighlightRow(),
+      ...buildHighlightRow({ title: "Người truyền động lực" }),
       kudos_images: [
         { id: "img-2", url: "https://example.com/2.png", position: 1 },
         { id: "img-1", url: "https://example.com/1.png", position: 0 },
@@ -108,8 +140,14 @@ describe("toFeedPost", () => {
 
     const post = toFeedPost(row, new Set());
 
-    expect(post.tagLine).toBeNull();
+    expect(post.tagLine).toBe("Người truyền động lực");
     expect(post.attachments.map((a) => a.id)).toEqual(["img-1", "img-2"]);
+  });
+
+  it("gives a null tagLine when the row's title is null", () => {
+    const row: KudosFeedRow = { ...buildHighlightRow({ title: null }), kudos_images: [] };
+
+    expect(toFeedPost(row, new Set()).tagLine).toBeNull();
   });
 
   it("trims a long message to a short attachment alt label", () => {
@@ -125,10 +163,38 @@ describe("toFeedPost", () => {
     expect(post.attachments[0]?.alt.endsWith("…")).toBe(true);
   });
 
+  it("strips markup out of the attachment alt text", () => {
+    const row: KudosFeedRow = {
+      ...buildHighlightRow({ message: "<b>bold</b> and <script>alert(1)</script> text" }),
+      kudos_images: [{ id: "img-1", url: "https://example.com/1.png", position: 0 }],
+    };
+
+    const alt = toFeedPost(row, new Set()).attachments[0]?.alt ?? "";
+    expect(alt).not.toContain("<");
+    expect(alt).not.toContain(">");
+  });
+
   it("returns an empty attachments array when the kudos carries no images", () => {
     const row: KudosFeedRow = { ...buildHighlightRow(), kudos_images: [] };
 
     expect(toFeedPost(row, new Set()).attachments).toEqual([]);
+  });
+
+  it("sanitizes the message so a <script> tag never survives into contentHtml", () => {
+    const row: KudosFeedRow = { ...buildHighlightRow({ message: "<script>alert(1)</script>ok" }), kudos_images: [] };
+
+    expect(toFeedPost(row, new Set()).contentHtml).not.toContain("<script>");
+  });
+
+  it("uses the anonymous sender ref, with no avatar, when is_anonymous is true", () => {
+    const row: KudosFeedRow = {
+      ...buildHighlightRow({ is_anonymous: true, anonymous_name: "Người bí ẩn" }),
+      kudos_images: [],
+    };
+
+    const post = toFeedPost(row, new Set());
+
+    expect(post.sender).toEqual({ id: "", name: "Người bí ẩn", department: "", avatarUrl: null, kudosCount: 0 });
   });
 });
 

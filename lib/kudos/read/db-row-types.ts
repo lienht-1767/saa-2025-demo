@@ -35,21 +35,15 @@ export type KudosHighlightRow = {
   sender: ProfileRefRow;
   recipient: ProfileRefRow;
   kudos_hashtags: HashtagLinkRow[];
-  /**
-   * "Danh hiệu" — nullable; legacy rows predate the phase-02 migration. Optional (not just
-   * nullable) here because phase 05 wires the read-path select and existing fixtures/tests built
-   * before that phase don't populate it; consuming it is phase 05's job, declaring it is this
-   * phase's.
-   */
-  title?: string | null;
+  /** "Danh hiệu" — nullable; legacy rows predate the phase-02 migration. */
+  title: string | null;
   /**
    * Presentational only (migration `20260818212642_add_kudos_title_and_anonymity.sql`):
    * `sender_id`/`sender` stay populated regardless of this flag. Never treat it as a real
-   * privacy boundary when consuming this row. Optional for the same pre-phase-05 fixture reason
-   * as `title`; treat a missing value as `false` when consuming.
+   * privacy boundary when consuming this row — see `toAnonymousPersonRef` in `map-board-data.ts`.
    */
-  is_anonymous?: boolean;
-  anonymous_name?: string | null;
+  is_anonymous: boolean;
+  anonymous_name: string | null;
 };
 
 /** Same as `KudosHighlightRow` plus the ALL KUDOS feed's image attachments. */

@@ -52,7 +52,7 @@ const HASHTAGS_EMBED = "kudos_hashtags(hashtag_id, hashtag:hashtags(name))";
 
 function kudosSelect(options: { withImages: boolean }): string {
   const base =
-    `id, message, like_count, created_at, ` +
+    `id, message, like_count, created_at, title, is_anonymous, anonymous_name, ` +
     `sender:profiles!kudos_sender_id_fkey(${PROFILE_REF_SELECT}), ` +
     `recipient:profiles!kudos_recipient_id_fkey(${PROFILE_REF_SELECT}), ` +
     HASHTAGS_EMBED;
