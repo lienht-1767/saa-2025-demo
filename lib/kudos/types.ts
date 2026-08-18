@@ -151,11 +151,33 @@ export type KudosBoardCallbacks = {
   onSelectHashtag?: (hashtag: string) => void;
 };
 
+/**
+ * Error-key grammar returned by `sendKudos` (via `SendKudosActionResult.fieldErrors`) and
+ * flattened by `useKudosActions` into `composerError: string | null`: `"<field>.<key>"`, e.g.
+ * `"title.required"`. The composer dialog resolves it to `t("errors.<field>.<key>")`, falling
+ * back to `t("errors.form.failed")` for anything it doesn't recognise. Known values:
+ * `recipientId.required|self` · `title.required|tooLong` · `message.required|tooLong` ·
+ * `hashtagIds.required|invalid` · `imageUrls.maxImages` · `anonymousName.required|tooLong`.
+ */
 export type KudosComposerInput = {
   recipientId: string;
+  /** "Danh hiệu" — required, trimmed, ≤120 chars. Persisted as `kudos.title` (phase 04). */
+  title: string;
+  /** Rich-text HTML from the editor; sanitized server-side before it ever reaches storage. */
   message: string;
+  /** Catalog hashtag uuids — at least 1, at most 5. */
   hashtagIds: string[];
+  /** At most 5, each drawn from `KUDOS_IMAGE_OPTIONS`. */
   imageUrls: string[];
+  /**
+   * Anonymous send is presentational only: `sender_id` is still written to `kudos` and stays
+   * readable via PostgREST — this is a recorded, accepted limitation for the internal SAA 2025
+   * demo (clarifications.md, round 2), not true anonymity. Never let UI copy near this field
+   * imply otherwise.
+   */
+  isAnonymous: boolean;
+  /** Required non-empty when `isAnonymous` is `true`; otherwise always `null`. */
+  anonymousName: string | null;
 };
 
 export type KudosBoardProps = {

@@ -4,7 +4,15 @@ import { validateSendKudosInput } from "@/lib/kudos/actions/send-kudos-validatio
 
 const SENDER = "30000000-0000-0000-0000-000000000001";
 const RECIPIENT = "30000000-0000-0000-0000-000000000002";
-const valid = { recipientId: RECIPIENT, message: "Cảm ơn bạn", hashtagIds: [], imageUrls: [] };
+const valid = {
+  recipientId: RECIPIENT,
+  title: "Người truyền động lực",
+  message: "Cảm ơn bạn",
+  hashtagIds: [],
+  imageUrls: [],
+  isAnonymous: false,
+  anonymousName: null,
+};
 
 describe("validateSendKudosInput", () => {
   it("accepts a valid payload", () => expect(validateSendKudosInput(valid, SENDER)).toEqual({}));

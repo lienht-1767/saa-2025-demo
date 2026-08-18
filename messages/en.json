@@ -209,20 +209,49 @@
       "title": "Send a thank-you",
       "recipientLabel": "Recipient",
       "recipientPlaceholder": "Search for the Sunner you want to thank",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Give your teammate a title",
+      "titleHintExample": "Example: The one who motivates me.",
+      "titleHintUsage": "The title will be shown as your Kudos headline.",
       "messageLabel": "Message",
       "messagePlaceholder": "Write your thank-you message...",
       "hashtagLabel": "Hashtag",
       "imageLabel": "Attached images",
+      "anonymousLabel": "Send this thank-you anonymously",
+      "anonymousNameLabel": "Anonymous display name",
+      "anonymousNamePlaceholder": "Enter the name to display",
       "submit": "Send Kudos",
       "cancel": "Cancel",
       "sending": "Sending…",
       "successToast": "Your thank-you was sent successfully!",
       "partialToast": "Your Kudos was sent, but some tags or images could not be attached.",
       "errors": {
-        "required": "Please write a message before sending.",
-        "tooLong": "Message must not exceed 2000 characters.",
-        "maxImages": "You can attach up to 5 images.",
-        "failed": "Couldn't send the kudos. Please try again."
+        "recipientId": {
+          "required": "Please choose a recipient.",
+          "self": "You cannot send a Kudos to yourself."
+        },
+        "title": {
+          "required": "Please enter a title.",
+          "tooLong": "Title must not exceed 120 characters."
+        },
+        "message": {
+          "required": "Please write a message before sending.",
+          "tooLong": "Message must not exceed 2000 characters."
+        },
+        "hashtagIds": {
+          "required": "Please choose at least 1 hashtag.",
+          "invalid": "Invalid hashtag. Please choose again."
+        },
+        "imageUrls": {
+          "maxImages": "You can attach up to 5 images."
+        },
+        "anonymousName": {
+          "required": "Please enter an anonymous display name.",
+          "tooLong": "Anonymous name must not exceed 120 characters."
+        },
+        "form": {
+          "failed": "Couldn't send the kudos. Please try again."
+        }
       }
     },
     "realtime": {

@@ -209,20 +209,49 @@
       "title": "Gửi lời cảm ơn",
       "recipientLabel": "Người nhận",
       "recipientPlaceholder": "Tìm kiếm Sunner bạn muốn cảm ơn",
+      "titleLabel": "Danh hiệu",
+      "titlePlaceholder": "Dành tặng một danh hiệu cho đồng đội",
+      "titleHintExample": "Ví dụ: Người truyền động lực cho tôi.",
+      "titleHintUsage": "Danh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
       "messageLabel": "Lời nhắn",
       "messagePlaceholder": "Viết lời cảm ơn của bạn...",
       "hashtagLabel": "Hashtag",
       "imageLabel": "Hình ảnh đính kèm",
+      "anonymousLabel": "Gửi lời cám ơn và ghi nhận ẩn danh",
+      "anonymousNameLabel": "Tên hiển thị ẩn danh",
+      "anonymousNamePlaceholder": "Nhập tên bạn muốn hiển thị",
       "submit": "Gửi Kudos",
       "cancel": "Hủy",
       "sending": "Đang gửi...",
       "successToast": "Đã gửi lời cảm ơn thành công!",
       "partialToast": "Kudos đã được gửi, nhưng một số hashtag hoặc ảnh chưa thể đính kèm.",
       "errors": {
-        "required": "Vui lòng nhập lời cảm ơn trước khi gửi.",
-        "tooLong": "Lời nhắn không được vượt quá 2000 ký tự.",
-        "maxImages": "Chỉ được đính kèm tối đa 5 hình ảnh.",
-        "failed": "Không thể gửi lời cảm ơn. Vui lòng thử lại."
+        "recipientId": {
+          "required": "Vui lòng chọn người nhận.",
+          "self": "Bạn không thể tự gửi Kudos cho chính mình."
+        },
+        "title": {
+          "required": "Vui lòng nhập danh hiệu.",
+          "tooLong": "Danh hiệu không được vượt quá 120 ký tự."
+        },
+        "message": {
+          "required": "Vui lòng nhập lời cảm ơn trước khi gửi.",
+          "tooLong": "Lời nhắn không được vượt quá 2000 ký tự."
+        },
+        "hashtagIds": {
+          "required": "Vui lòng chọn ít nhất 1 hashtag.",
+          "invalid": "Hashtag không hợp lệ. Vui lòng chọn lại."
+        },
+        "imageUrls": {
+          "maxImages": "Chỉ được đính kèm tối đa 5 hình ảnh."
+        },
+        "anonymousName": {
+          "required": "Vui lòng nhập tên hiển thị ẩn danh.",
+          "tooLong": "Tên ẩn danh không được vượt quá 120 ký tự."
+        },
+        "form": {
+          "failed": "Không thể gửi lời cảm ơn. Vui lòng thử lại."
+        }
       }
     },
     "realtime": {
