@@ -135,6 +135,105 @@
     "body": "ĐIỂM MỚI CỦA SAA 2025\nHoạt động ghi nhận và cảm ơn đồng nghiệp - lần đầu tiên được diễn ra dành cho tất cả Sunner. Hoạt động sẽ được triển khai vào tháng 11/2025, khuyến khích người Sun* chia sẻ những lời ghi nhận, cảm ơn đồng nghiệp trên hệ thống do BTC công bố. Đây sẽ là chất liệu để Hội đồng Heads tham khảo trong quá trình lựa chọn người đạt giải.",
     "comingSoon": "Hệ thống gửi Kudos đang được hoàn thiện."
   },
+  "kudosBoard": {
+    "hero": {
+      "title": "Hệ thống ghi nhận và cảm ơn",
+      "logoAlt": "Sun* Kudos",
+      "composerPlaceholder": "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?",
+      "searchLabel": "Tìm kiếm profile Sunner",
+      "searchPlaceholder": "Tìm kiếm profile Sunner",
+      "searchAction": "Tìm profile",
+      "searching": "Đang tìm kiếm...",
+      "searchNotFound": "Không tìm thấy Sunner phù hợp.",
+      "searchError": "Không thể tìm kiếm lúc này. Vui lòng thử lại."
+    },
+    "highlight": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "HIGHLIGHT KUDOS",
+      "hashtagFilter": "Hashtag",
+      "departmentFilter": "Phòng ban",
+      "clearFilter": "Tất cả",
+      "prevSlide": "Slide trước",
+      "nextSlide": "Slide tiếp theo",
+      "empty": "Hiện tại chưa có Kudos nào.",
+      "inactiveCard": "Thẻ kudos này đang ở chế độ xem phụ, không tương tác được."
+    },
+    "spotlight": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "SPOTLIGHT BOARD",
+      "totalKudos": "{count} KUDOS",
+      "searchLabel": "Tìm kiếm profile Sunner",
+      "searchPlaceholder": "Tìm kiếm",
+      "zoomOut": "Thu nhỏ",
+      "zoomIn": "Phóng to",
+      "resetView": "Đặt lại góc nhìn",
+      "panZoomLabel": "Bảng Spotlight — kéo để di chuyển, dùng nút để phóng to/thu nhỏ",
+      "empty": "Chưa có dữ liệu",
+      "wordCloudTitle": "Bảng vinh danh Sunner nhận Kudos",
+      "tickerLine": "{name} đã nhận được một Kudos mới"
+    },
+    "feed": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "ALL KUDOS",
+      "empty": "Hiện tại chưa có Kudos nào.",
+      "loadMore": "Xem thêm"
+    },
+    "sidebar": {
+      "received": "Số Kudos bạn nhận được:",
+      "sent": "Số Kudos bạn đã gửi:",
+      "hearts": "Số tim bạn nhận được:",
+      "secretBoxesOpened": "Số Secret Box bạn đã mở:",
+      "secretBoxesUnopened": "Số Secret Box chưa mở:",
+      "openSecretBox": "Mở Secret Box",
+      "recentGiftsTitle": "10 SUNNER NHẬN QUÀ MỚI NHẤT",
+      "emptyList": "Chưa có dữ liệu",
+      "guestTitle": "Đăng nhập để xem thống kê của bạn",
+      "guestBody": "Đăng nhập bằng tài khoản Google để xem số Kudos bạn đã nhận, đã gửi và số tim bạn nhận được.",
+      "guestCta": "Đăng nhập ngay",
+      "secretBoxStub": "Tính năng Secret Box sẽ sớm ra mắt."
+    },
+    "actions": {
+      "copyLink": "Copy Link",
+      "viewDetail": "Xem chi tiết",
+      "toggleLike": "Thích hoặc bỏ thích lời cảm ơn này",
+      "likeError": "Không thể cập nhật lượt tim. Vui lòng thử lại.",
+      "selfLikeError": "Bạn không thể thả tim cho Kudos do chính mình gửi.",
+      "copyLinkToast": "Link copied — ready to share!",
+      "copyLinkError": "Không thể sao chép liên kết. Vui lòng thử lại."
+    },
+    "common": {
+      "hashtagOverflow": "và {count} hashtag khác",
+      "closeLightbox": "Đóng"
+    },
+    "composer": {
+      "title": "Gửi lời cảm ơn",
+      "recipientLabel": "Người nhận",
+      "recipientPlaceholder": "Tìm kiếm Sunner bạn muốn cảm ơn",
+      "messageLabel": "Lời nhắn",
+      "messagePlaceholder": "Viết lời cảm ơn của bạn...",
+      "hashtagLabel": "Hashtag",
+      "imageLabel": "Hình ảnh đính kèm",
+      "submit": "Gửi Kudos",
+      "cancel": "Hủy",
+      "sending": "Đang gửi...",
+      "successToast": "Đã gửi lời cảm ơn thành công!",
+      "partialToast": "Kudos đã được gửi, nhưng một số hashtag hoặc ảnh chưa thể đính kèm.",
+      "errors": {
+        "required": "Vui lòng nhập lời cảm ơn trước khi gửi.",
+        "tooLong": "Lời nhắn không được vượt quá 2000 ký tự.",
+        "maxImages": "Chỉ được đính kèm tối đa 5 hình ảnh.",
+        "failed": "Không thể gửi lời cảm ơn. Vui lòng thử lại."
+      }
+    },
+    "realtime": {
+      "reconnecting": "Đang kết nối lại để cập nhật Kudos mới nhất..."
+    },
+    "stub": {
+      "title": "Sun* Kudos",
+      "body": "Bảng Kudos đang được hoàn thiện. Quay lại sau nhé!",
+      "back": "Về trang chủ"
+    }
+  },
   "notFound": {
     "title": "Không tìm thấy trang",
     "description": "Đường dẫn này không tồn tại hoặc đã được di chuyển.",

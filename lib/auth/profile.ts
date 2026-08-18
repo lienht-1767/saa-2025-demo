@@ -24,10 +24,8 @@ export type NotificationRow = {
 
 type ProfileDatabaseRow = {
   id: string;
-  email: string;
   full_name: string | null;
   avatar_url: string | null;
-  role: UserRole;
 };
 
 type NotificationDatabaseRow = {
@@ -38,6 +36,28 @@ type NotificationDatabaseRow = {
   read_at: string | null;
   created_at: string;
 };
+
+/**
+ * `profiles.email`/`profiles.role` are granted to nobody through PostgREST — see
+ * `supabase/migrations/20260817090100_create_profiles.sql` and `clarifications.md` § Session
+ * 2026-08-17 (vòng 3). Do not add either column back to the select below; a `42501` from
+ * PostgREST is the intended failure mode if someone tries.
+ *
+ * `email` is sourced from `auth.getUser()` (already fetched above); `role` is sourced from the
+ * `current_user_role()` RPC, which fails closed to `"member"` — see `resolveRole`.
+ */
+const PROFILE_SELECT_COLUMNS = "id,full_name,avatar_url";
+
+/** Reduces the `current_user_role()` RPC result to a role, defaulting to the least-privileged
+ * `"member"` on any error or unexpected shape. A privilege escalation must never come from a
+ * degraded read, so this never returns `"admin"` unless the RPC explicitly said so. */
+function resolveRole(result: { data: unknown; error: { message: string } | null }): UserRole {
+  if (result.error) {
+    console.warn("[auth/profile] current_user_role() RPC failed; using member fallback.");
+    return "member";
+  }
+  return result.data === "admin" ? "admin" : "member";
+}
 
 /** Validates the request user, then reads their own RLS-protected profile. Never throws. */
 export async function getCurrentProfile(): Promise<SessionProfile | null> {
@@ -50,17 +70,23 @@ export async function getCurrentProfile(): Promise<SessionProfile | null> {
     const user = authData.user;
     if (authError || !user) return null;
 
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("id,email,full_name,avatar_url,role")
-      .eq("id", user.id)
-      .maybeSingle<ProfileDatabaseRow>();
+    const email = user.email ?? "";
+
+    const [{ data, error }, roleResult] = await Promise.all([
+      supabase
+        .from("profiles")
+        .select(PROFILE_SELECT_COLUMNS)
+        .eq("id", user.id)
+        .maybeSingle<ProfileDatabaseRow>(),
+      supabase.rpc("current_user_role"),
+    ]);
+    const role = resolveRole(roleResult);
 
     if (error || !data) {
-      if (error) console.warn("[auth/profile] Profile query failed; using member fallback.");
+      if (error) console.warn("[auth/profile] Profile query failed; using metadata fallback.");
       return {
         userId: user.id,
-        email: user.email ?? "",
+        email,
         fullName:
           typeof user.user_metadata.full_name === "string"
             ? user.user_metadata.full_name
@@ -73,16 +99,16 @@ export async function getCurrentProfile(): Promise<SessionProfile | null> {
             : typeof user.user_metadata.picture === "string"
               ? user.user_metadata.picture
               : null,
-        role: "member",
+        role,
       };
     }
 
     return {
       userId: data.id,
-      email: data.email,
+      email,
       fullName: data.full_name,
       avatarUrl: data.avatar_url,
-      role: data.role,
+      role,
     };
   } catch {
     console.warn("[auth/profile] Unable to resolve the current profile.");

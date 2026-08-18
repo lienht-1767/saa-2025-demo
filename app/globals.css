@@ -18,6 +18,16 @@
   --badge-danger: #d4271d; /* unread notification dot — I2167:9091;186:2101;186:2090 */
   --ink: #00101a; /* text and icons sitting on the yellow fill — I2167:9063;186:1568 */
   --kudos-surface: #0f0f0f; /* Sun* Kudos card base colour — I3390:10349;313:8416 */
+
+  /*
+   * Design tokens measured from the MoMorph "Sun* Kudos - Live board" frame (2940:13431),
+   * screen MaZUn5xHXZ. Sourced from the file's `Color` variable collection plus the frame's
+   * computed styles (evidence/momorph-frame-styles.json), not guessed.
+   */
+  --kudos-card: #fff8e1; /* Details-PrimaryButton-Hover — highlight & all-kudos post card fill */
+  --kudos-muted: #999999; /* Details-Text-Secondary-2 — department/time labels on a kudos card */
+  --kudos-sidebar-surface: #00070c; /* Details-Container-2 — D.1/D.3 sidebar box fill */
+  --kudos-spotlight-name: #f17676; /* the one word-cloud name the design renders highlighted, e.g. 2940:14198 */
 }
 
 @theme inline {
@@ -34,6 +44,10 @@
   --color-badge-danger: var(--badge-danger);
   --color-ink: var(--ink);
   --color-kudos-surface: var(--kudos-surface);
+  --color-kudos-card: var(--kudos-card);
+  --color-kudos-muted: var(--kudos-muted);
+  --color-kudos-sidebar-surface: var(--kudos-sidebar-surface);
+  --color-kudos-spotlight-name: var(--kudos-spotlight-name);
   --font-sans: var(--font-montserrat);
   --font-alt: var(--font-montserrat-alternates);
 }

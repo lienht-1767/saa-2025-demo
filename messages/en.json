@@ -135,6 +135,105 @@
     "body": "NEW FOR SAA 2025\nA recognition and colleague-appreciation activity for every Sunner, running for the first time. Launching in November 2025, it encourages Sun* people to share recognition and thanks through the platform announced by the organising team. These messages will help the Heads Council select award recipients.",
     "comingSoon": "The Kudos submission system is being completed."
   },
+  "kudosBoard": {
+    "hero": {
+      "title": "Recognition and thank-you system",
+      "logoAlt": "Sun* Kudos",
+      "composerPlaceholder": "Today, who would you like to thank and recognise?",
+      "searchLabel": "Search a Sunner profile",
+      "searchPlaceholder": "Search a Sunner profile",
+      "searchAction": "Search profiles",
+      "searching": "Searching...",
+      "searchNotFound": "No matching Sunner found.",
+      "searchError": "Search is unavailable right now. Please try again."
+    },
+    "highlight": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "HIGHLIGHT KUDOS",
+      "hashtagFilter": "Hashtag",
+      "departmentFilter": "Department",
+      "clearFilter": "All",
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "empty": "There are no kudos yet.",
+      "inactiveCard": "This kudos card is a secondary preview and isn't interactive."
+    },
+    "spotlight": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "SPOTLIGHT BOARD",
+      "totalKudos": "{count} KUDOS",
+      "searchLabel": "Search a Sunner profile",
+      "searchPlaceholder": "Search",
+      "zoomOut": "Zoom out",
+      "zoomIn": "Zoom in",
+      "resetView": "Reset view",
+      "panZoomLabel": "Spotlight board — drag to pan, use the buttons to zoom in or out",
+      "empty": "No data yet",
+      "wordCloudTitle": "Board of Sunners who received Kudos",
+      "tickerLine": "{name} just received a new Kudos"
+    },
+    "feed": {
+      "caption": "Sun* Annual Awards 2025",
+      "title": "ALL KUDOS",
+      "empty": "There are no kudos yet.",
+      "loadMore": "Load more"
+    },
+    "sidebar": {
+      "received": "Kudos you received:",
+      "sent": "Kudos you sent:",
+      "hearts": "Hearts you received:",
+      "secretBoxesOpened": "Secret Boxes you opened:",
+      "secretBoxesUnopened": "Secret Boxes still unopened:",
+      "openSecretBox": "Open Secret Box",
+      "recentGiftsTitle": "10 LATEST SUNNERS TO RECEIVE A GIFT",
+      "emptyList": "No data yet",
+      "guestTitle": "Sign in to see your stats",
+      "guestBody": "Sign in with your Google account to see the Kudos you've received, sent, and the hearts you've earned.",
+      "guestCta": "Sign in now",
+      "secretBoxStub": "Secret Box is coming soon."
+    },
+    "actions": {
+      "copyLink": "Copy Link",
+      "viewDetail": "View details",
+      "toggleLike": "Like or unlike this kudos",
+      "likeError": "Couldn't update the heart. Please try again.",
+      "selfLikeError": "You cannot like a Kudos you sent yourself.",
+      "copyLinkToast": "Link copied — ready to share!",
+      "copyLinkError": "Couldn't copy the link. Please try again."
+    },
+    "common": {
+      "hashtagOverflow": "and {count} more hashtags",
+      "closeLightbox": "Close"
+    },
+    "composer": {
+      "title": "Send a thank-you",
+      "recipientLabel": "Recipient",
+      "recipientPlaceholder": "Search for the Sunner you want to thank",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Write your thank-you message...",
+      "hashtagLabel": "Hashtag",
+      "imageLabel": "Attached images",
+      "submit": "Send Kudos",
+      "cancel": "Cancel",
+      "sending": "Sending…",
+      "successToast": "Your thank-you was sent successfully!",
+      "partialToast": "Your Kudos was sent, but some tags or images could not be attached.",
+      "errors": {
+        "required": "Please write a message before sending.",
+        "tooLong": "Message must not exceed 2000 characters.",
+        "maxImages": "You can attach up to 5 images.",
+        "failed": "Couldn't send the kudos. Please try again."
+      }
+    },
+    "realtime": {
+      "reconnecting": "Reconnecting to load the latest Kudos…"
+    },
+    "stub": {
+      "title": "Sun* Kudos",
+      "body": "The Kudos board is still being finished. Check back soon!",
+      "back": "Back to home"
+    }
+  },
   "notFound": {
     "title": "Page not found",
     "description": "This address does not exist or the page has moved.",
