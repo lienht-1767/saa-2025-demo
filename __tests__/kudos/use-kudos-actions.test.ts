@@ -17,6 +17,18 @@ function setup() {
 
 describe("useKudosActions", () => {
   beforeEach(() => { toggleMock.mockReset(); sendMock.mockReset(); });
+  it("namespaces a validation field error to '<field>.<key>'", async () => {
+    sendMock.mockResolvedValue({ status: "validation-error", fieldErrors: { title: "required" } });
+    const { result } = setup();
+    await act(() => result.current.submitKudos({} as never));
+    expect(result.current.composerError).toBe("title.required");
+  });
+  it("falls back to 'form.failed' when the action fails with no field errors", async () => {
+    sendMock.mockResolvedValue({ status: "failed" });
+    const { result } = setup();
+    await act(() => result.current.submitKudos({} as never));
+    expect(result.current.composerError).toBe("form.failed");
+  });
   it("keeps an optimistic like after success", async () => {
     toggleMock.mockResolvedValue({ status: "liked", likeCount: 421 });
     const { result, getData } = setup();

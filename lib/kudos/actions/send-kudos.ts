@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireViewer, type SendKudosActionResult } from "@/lib/kudos/actions/action-result";
 import { validateSendKudosInput } from "@/lib/kudos/actions/send-kudos-validation";
+import { sanitizeKudosHtml } from "@/lib/kudos/sanitize-kudos-html";
 import type { KudosComposerInput } from "@/lib/kudos/types";
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 
@@ -11,7 +12,13 @@ export async function sendKudos(input: KudosComposerInput): Promise<SendKudosAct
   try {
     const viewer = await requireViewer();
     if (!viewer) return { status: "unauthenticated" };
-    const fieldErrors = validateSendKudosInput(input, viewer.userId);
+
+    // Sanitize once, then validate and store the SAME sanitized value — see
+    // `validateSendKudosInput`'s doc comment for why the order matters (an all-markup message
+    // must sanitize to empty and fail as "required", not slip through on its raw length).
+    const sanitizedMessage = sanitizeKudosHtml(input.message);
+    const sanitizedInput: KudosComposerInput = { ...input, message: sanitizedMessage };
+    const fieldErrors = validateSendKudosInput(sanitizedInput, viewer.userId);
     if (Object.keys(fieldErrors).length > 0) return { status: "validation-error", fieldErrors };
 
     const supabase = await createSupabaseServerClient();
@@ -28,7 +35,12 @@ export async function sendKudos(input: KudosComposerInput): Promise<SendKudosAct
         sender_id: viewer.userId,
         recipient_id: input.recipientId,
         department_id: recipient.data.department_id,
-        message: input.message.trim(),
+        title: input.title.trim(),
+        message: sanitizedMessage,
+        // Server never trusts the client on this: force null here regardless of what the
+        // payload's anonymousName carried when isAnonymous is false.
+        is_anonymous: input.isAnonymous,
+        anonymous_name: input.isAnonymous ? input.anonymousName!.trim() : null,
       })
       .select("id")
       .single();
