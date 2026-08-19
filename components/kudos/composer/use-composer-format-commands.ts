@@ -6,6 +6,15 @@ import { normalizeElementTree } from "@/components/kudos/composer/composer-html-
 
 export type ComposerFormatState = { bold: boolean; italic: boolean; strike: boolean; list: boolean };
 
+/** Escapes the dialog's raw input before it is handed to `insertHTML`. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 /**
  * `execCommand` wrappers for the six toolbar controls (spec C.1–C.6). `execCommand` is
  * deprecated but remains the only zero-dependency way to apply selection formatting in a
@@ -20,6 +29,12 @@ export type ComposerFormatState = { bold: boolean; italic: boolean; strike: bool
  * form to `formatBlock`, the shape that works across engines; normalization catches whatever
  * comes out either way. Same for `createLink`: normalization strips everything but `href` off
  * whatever anchor the command created, or drops it if the href isn't `http(s)`.
+ *
+ * `insertLink` takes the `{ text, url }` pair the `Add link box` dialog (MoMorph `OyDLDuSGEa`)
+ * collects. It inserts a whole anchor through `insertHTML` rather than `createLink`, because the
+ * design lets the label differ from the destination — `createLink` can only re-label the current
+ * selection. Both halves are HTML-escaped before insertion and the tree is normalized after, so
+ * the allowlist invariant still holds.
  */
 export function useComposerFormatCommands(editorRef: RefObject<HTMLDivElement | null>) {
   const [state, setState] = useState<ComposerFormatState>({ bold: false, italic: false, strike: false, list: false });
@@ -54,6 +69,7 @@ export function useComposerFormatCommands(editorRef: RefObject<HTMLDivElement | 
     toggleStrike: () => runCommand("strikeThrough"),
     toggleList: () => runCommand("insertOrderedList"),
     toggleQuote: () => runCommand("formatBlock", "<blockquote>"),
-    insertLink: (url: string) => runCommand("createLink", url),
+    insertLink: ({ text, url }: { text: string; url: string }) =>
+      runCommand("insertHTML", `<a href="${escapeHtml(url)}">${escapeHtml(text)}</a>`),
   };
 }

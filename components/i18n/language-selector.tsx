@@ -11,9 +11,14 @@ import { useMenuKeyboardNavigation } from "@/lib/hooks/use-menu-keyboard-navigat
 /**
  * Header language switcher — flag + code + chevron, opening a menu of the supported locales.
  *
- * Design: `mms_A.2_Language` (I662:14391;186:1601). Selecting a locale writes the
- * NEXT_LOCALE cookie through a Server Action, which revalidates the layout so every
- * server-rendered string re-renders in the new language.
+ * Trigger: `mms_A.2_Language` (I662:14391;186:1601). Open menu: `mms_A_Dropdown-List` on
+ * MoMorph `hUyaaugye2` (Figma `525:11713`) — 6px padding, 8px radius,
+ * `--kudos-sidebar-surface` (#00070C) fill, 1px `--accent-border`, holding one 56px row per
+ * locale. Each row shows the flag beside the short code ("VN"/"EN") at 16/24 700, not the full
+ * language name, and the selected row keeps the 10% brand-yellow fill.
+ *
+ * Selecting a locale writes the NEXT_LOCALE cookie through a Server Action, which revalidates
+ * the layout so every server-rendered string re-renders in the new language.
  */
 export function LanguageSelector() {
   const t = useTranslations("common");
@@ -83,7 +88,7 @@ export function LanguageSelector() {
           role="menu"
           aria-label={t("chooseLanguage")}
           onKeyDown={handleMenuKeyDown}
-          className="absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-lg bg-surface-dark py-1 shadow-lg ring-1 ring-white/15"
+          className="absolute right-0 z-50 mt-2 flex min-w-[110px] flex-col rounded-lg border border-accent-border bg-kudos-sidebar-surface p-1.5 shadow-lg"
         >
           {SUPPORTED_LOCALES.map((locale) => {
             const label = LOCALE_LABELS[locale];
@@ -96,12 +101,13 @@ export function LanguageSelector() {
                   role="menuitemradio"
                   aria-checked={isActive}
                   onClick={() => handleSelect(locale)}
-                  className={`flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm text-white transition-colors hover:bg-white/10 ${
-                    isActive ? "font-semibold" : "font-normal"
+                  aria-label={label.name}
+                  className={`flex h-14 w-full cursor-pointer items-center gap-2 rounded p-4 text-left text-base leading-6 font-bold tracking-[0.15px] text-white transition-colors duration-200 hover:bg-brand-yellow/10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-yellow motion-reduce:transition-none ${
+                    isActive ? "bg-brand-yellow/10" : ""
                   }`}
                 >
-                  <Image src={label.flag} alt="" width={20} height={14} aria-hidden />
-                  <span>{label.name}</span>
+                  <Image src={label.flag} alt="" width={24} height={24} aria-hidden className="size-6 shrink-0" />
+                  <span>{label.code}</span>
                 </button>
               </li>
             );

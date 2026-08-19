@@ -55,3 +55,12 @@ export function IconPen(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** `MM_MEDIA_Dashboard` (I666:9728;666:9452;186:1441) — the grid mark on the admin Dashboard row. */
+export function IconGrid(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...props}>
+      <path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z" />
+    </svg>
+  );
+}

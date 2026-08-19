@@ -31,6 +31,8 @@ export type SiteHeaderProps = {
   /** Awards reference uses an opaque #0D1318 bar rather than artwork showing through. */
   surface?: "overlay" | "solid";
   displayName?: string;
+  /** `/profile/{id}` for the signed-in viewer, from `getHeaderSession`. */
+  profileHref?: string;
   onSignOut?: () => void | Promise<void>;
 };
 
@@ -43,6 +45,7 @@ export async function SiteHeader({
   activeHref,
   surface = "overlay",
   displayName,
+  profileHref,
   onSignOut,
 }: SiteHeaderProps = {}) {
   const t = await getTranslations("common");
@@ -97,7 +100,13 @@ export async function SiteHeader({
           )}
           <LanguageSelector />
           {isFull && isAuthenticated && (
-            <AccountMenu isAdmin={isAdmin} displayName={displayName} onSignOut={onSignOut} />
+            <AccountMenu
+              isAdmin={isAdmin}
+              displayName={displayName}
+              profileHref={profileHref}
+              profileActive={activeHref === profileHref}
+              onSignOut={onSignOut}
+            />
           )}
         </div>
       </div>

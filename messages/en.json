@@ -126,7 +126,9 @@
     },
     "widget": {
       "label": "Quick actions",
-      "empty": "No actions available yet."
+      "rules": "Rules",
+      "writeKudos": "Write KUDOS",
+      "close": "Close"
     }
   },
   "kudosPage": {
@@ -225,6 +227,11 @@
       "communityStandards": "Community standards",
       "linkPromptMessage": "Enter a URL (https://...)",
       "linkInvalid": "Invalid URL — it must start with http:// or https://",
+      "linkDialogTitle": "Add link",
+      "linkTextLabel": "Text",
+      "linkUrlLabel": "URL",
+      "linkSave": "Save",
+      "linkTextInvalid": "Link text must be between 1 and 100 characters.",
       "mentionEmpty": "No colleagues found",
       "hashtagLabel": "Hashtag",
       "hashtagAddButton": "Hashtag",

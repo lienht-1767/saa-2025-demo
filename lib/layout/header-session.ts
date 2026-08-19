@@ -7,6 +7,8 @@ export type HeaderSession = {
   isAuthenticated: boolean;
   isAdmin: boolean;
   displayName: string | undefined;
+  /** `/profile/{id}` for the signed-in viewer — the account menu's Profile target. */
+  profileHref: string | undefined;
   unreadNotificationCount: number;
   notifications: readonly NotificationItem[];
 };
@@ -15,6 +17,7 @@ const GUEST_HEADER: HeaderSession = {
   isAuthenticated: false,
   isAdmin: false,
   displayName: undefined,
+  profileHref: undefined,
   unreadNotificationCount: 0,
   notifications: [],
 };
@@ -32,6 +35,7 @@ export async function getHeaderSession(): Promise<HeaderSession> {
     isAuthenticated: true,
     isAdmin: profile.role === "admin",
     displayName: profile.fullName ?? profile.email,
+    profileHref: `/profile/${profile.userId}`,
     unreadNotificationCount: unreadCount,
     notifications: rows.map((row) => ({
       id: row.id,

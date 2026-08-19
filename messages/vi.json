@@ -126,7 +126,9 @@
     },
     "widget": {
       "label": "Hành động nhanh",
-      "empty": "Chưa có hành động nào."
+      "rules": "Thể lệ",
+      "writeKudos": "Viết KUDOS",
+      "close": "Đóng"
     }
   },
   "kudosPage": {
@@ -225,6 +227,11 @@
       "communityStandards": "Tiêu chuẩn cộng đồng",
       "linkPromptMessage": "Nhập đường dẫn (https://...)",
       "linkInvalid": "Đường dẫn không hợp lệ, phải bắt đầu bằng http:// hoặc https://",
+      "linkDialogTitle": "Thêm đường dẫn",
+      "linkTextLabel": "Nội dung",
+      "linkUrlLabel": "URL",
+      "linkSave": "Lưu",
+      "linkTextInvalid": "Nội dung liên kết phải có từ 1 đến 100 ký tự.",
       "mentionEmpty": "Không tìm thấy đồng nghiệp",
       "hashtagLabel": "Hashtag",
       "hashtagAddButton": "Hashtag",
