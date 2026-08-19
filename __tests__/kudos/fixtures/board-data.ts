@@ -46,7 +46,7 @@ function inferredCard(id: string, senderId: string, receiverId: string, likeCoun
     sender: findMockPerson(senderId),
     receiver: findMockPerson(receiverId),
     postedAt: "2025-10-30T09:15:00.000Z",
-    content: "Cảm ơn bạn đã luôn nhiệt tình hỗ trợ đội nhóm trong suốt dự án vừa qua, rất trân trọng đóng góp của bạn.",
+    contentHtml: "Cảm ơn bạn đã luôn nhiệt tình hỗ trợ đội nhóm trong suốt dự án vừa qua, rất trân trọng đóng góp của bạn.",
     hashtags: ["#Dedicated", "#TeamSpirit"],
     likeCount,
     likedByViewer: false,
@@ -58,7 +58,7 @@ const EVIDENCED_CARD: KudosHighlightCard = {
   sender: findMockPerson("huynh-duong-xuan"),
   receiver: findMockPerson("do-hoang-hiep"),
   postedAt: "2025-10-30T10:00:00.000Z",
-  content:
+  contentHtml:
     "Cảm ơn người em bình thường nhưng phi thường :D Cảm ơn sự chăm chỉ, cần mẫn của em đã tạo động lực rất...",
   hashtags: ["#Dedicated", "#Inspring"],
   likeCount: 1000,
@@ -109,7 +109,7 @@ function inferredPost(id: string, senderId: string, receiverId: string, tagLine:
     receiver: findMockPerson(receiverId),
     postedAt: "2025-10-30T10:00:00.000Z",
     tagLine,
-    content:
+    contentHtml:
       "Cảm ơn bạn đã đồng hành và hỗ trợ hết mình trong suốt chặng đường vừa qua, chúc bạn luôn giữ vững năng lượng tích cực này.",
     attachments: [],
     hashtags: ["#Dedicated", "#Inspring"],

@@ -57,8 +57,8 @@ export function useKudosActions({
       await onSent();
       return;
     }
-    const firstError = result.fieldErrors ? Object.values(result.fieldErrors)[0] : null;
-    setComposerError(firstError ?? "failed");
+    const firstEntry = result.fieldErrors ? Object.entries(result.fieldErrors)[0] : undefined;
+    setComposerError(firstEntry ? `${firstEntry[0]}.${firstEntry[1]}` : "form.failed");
   };
 
   const toggle = async (postId: string, nextLiked: boolean) => {

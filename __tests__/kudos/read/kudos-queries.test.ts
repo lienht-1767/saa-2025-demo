@@ -73,6 +73,9 @@ describe("fetchHighlightRows", () => {
     const select = builders.kudos.select as ReturnType<typeof vi.fn>;
     expect(select.mock.calls[0]?.[0]).toContain("kudos_hashtags(hashtag_id, hashtag:hashtags(name))");
     expect(select.mock.calls[0]?.[0]).not.toContain("!inner");
+    expect(select.mock.calls[0]?.[0]).toContain("title");
+    expect(select.mock.calls[0]?.[0]).toContain("is_anonymous");
+    expect(select.mock.calls[0]?.[0]).toContain("anonymous_name");
 
     const mainEq = builders.kudos.eq as ReturnType<typeof vi.fn>;
     expect(mainEq).toHaveBeenCalledWith("department_id", "d1");
@@ -141,6 +144,9 @@ describe("fetchFeedRows", () => {
 
     const select = builder.select as ReturnType<typeof vi.fn>;
     expect(select.mock.calls[0]?.[0]).toContain("kudos_images(id, url, position)");
+    expect(select.mock.calls[0]?.[0]).toContain("title");
+    expect(select.mock.calls[0]?.[0]).toContain("is_anonymous");
+    expect(select.mock.calls[0]?.[0]).toContain("anonymous_name");
     expect(builder.range).toHaveBeenCalledWith(0, 10);
   });
 

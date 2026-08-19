@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 import { getLocale } from "@/lib/i18n/locale";
+import { getMessagesForLocale } from "@/lib/i18n/request";
 import "./globals.css";
 
 // The Figma design sets every text layer in Montserrat; 400/500/700 cover the weights used.
@@ -42,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const locale = await getLocale();
-  const messages = await getMessages();
+  const messages = getMessagesForLocale(locale);
 
   return (
     <html

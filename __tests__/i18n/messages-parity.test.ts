@@ -37,4 +37,17 @@ describe("message files", () => {
     expect(vi.common.copyright).toBe("Bản quyền thuộc về Sun* © 2025");
     expect(vi.login.error).toBe("Đăng nhập không thành công. Vui lòng thử lại.");
   });
+
+  it("does not fall back to English for translatable Kudos board copy", () => {
+    expect(vi.kudosBoard.highlight.title).toBe("KUDOS NỔI BẬT");
+    expect(vi.kudosBoard.spotlight.title).toBe("BẢNG VINH DANH");
+    expect(vi.kudosBoard.feed.title).toBe("TẤT CẢ KUDOS");
+    expect(vi.kudosBoard.actions.copyLink).toBe("Sao chép liên kết");
+    expect(vi.kudosBoard.actions.copyLinkToast).toBe("Đã sao chép liên kết!");
+    expect(vi.kudosBoard.composer.imageLabel).toBe("Hình ảnh");
+
+    expect(vi.kudosBoard.highlight.title).not.toBe(en.kudosBoard.highlight.title);
+    expect(vi.kudosBoard.spotlight.title).not.toBe(en.kudosBoard.spotlight.title);
+    expect(vi.kudosBoard.feed.title).not.toBe(en.kudosBoard.feed.title);
+  });
 });

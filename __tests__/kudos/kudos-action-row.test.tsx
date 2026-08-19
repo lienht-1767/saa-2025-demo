@@ -57,10 +57,10 @@ describe("KudosActionRow", () => {
     const writeText = vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
     renderRow();
 
-    await user.click(screen.getByRole("button", { name: "Copy Link" }));
+    await user.click(screen.getByRole("button", { name: "Sao chép liên kết" }));
 
     expect(writeText).toHaveBeenCalledWith("https://example.com/kudos/1");
-    expect(await screen.findByText("Link copied — ready to share!")).toBeInTheDocument();
+    expect(await screen.findByText("Đã sao chép liên kết!")).toBeInTheDocument();
   });
 
   it("calls onToggleLike with the flipped state", async () => {

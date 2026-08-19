@@ -35,6 +35,15 @@ export type KudosHighlightRow = {
   sender: ProfileRefRow;
   recipient: ProfileRefRow;
   kudos_hashtags: HashtagLinkRow[];
+  /** "Danh hiệu" — nullable; legacy rows predate the phase-02 migration. */
+  title: string | null;
+  /**
+   * Presentational only (migration `20260818212642_add_kudos_title_and_anonymity.sql`):
+   * `sender_id`/`sender` stay populated regardless of this flag. Never treat it as a real
+   * privacy boundary when consuming this row — see `toAnonymousPersonRef` in `map-board-data.ts`.
+   */
+  is_anonymous: boolean;
+  anonymous_name: string | null;
 };
 
 /** Same as `KudosHighlightRow` plus the ALL KUDOS feed's image attachments. */

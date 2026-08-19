@@ -127,7 +127,7 @@ describe("KudosBoardLive", () => {
           receiver: ACTIVE_CARD.receiver,
           postedAt: "2025-11-01T00:00:00.000Z",
           tagLine: null,
-          content: "Bài kudos bổ sung cho bài kiểm tra Xem thêm.",
+          contentHtml: "Bài kudos bổ sung cho bài kiểm tra Xem thêm.",
           attachments: [],
           hashtags: [],
           likeCount: 0,
