@@ -149,7 +149,7 @@
     },
     "highlight": {
       "caption": "Sun* Annual Awards 2025",
-      "title": "HIGHLIGHT KUDOS",
+      "title": "KUDOS NỔI BẬT",
       "hashtagFilter": "Hashtag",
       "departmentFilter": "Phòng ban",
       "clearFilter": "Tất cả",
@@ -160,7 +160,7 @@
     },
     "spotlight": {
       "caption": "Sun* Annual Awards 2025",
-      "title": "SPOTLIGHT BOARD",
+      "title": "BẢNG VINH DANH",
       "totalKudos": "{count} KUDOS",
       "searchLabel": "Tìm kiếm profile Sunner",
       "searchPlaceholder": "Tìm kiếm",
@@ -174,7 +174,7 @@
     },
     "feed": {
       "caption": "Sun* Annual Awards 2025",
-      "title": "ALL KUDOS",
+      "title": "TẤT CẢ KUDOS",
       "empty": "Hiện tại chưa có Kudos nào.",
       "loadMore": "Xem thêm"
     },
@@ -193,12 +193,12 @@
       "secretBoxStub": "Tính năng Secret Box sẽ sớm ra mắt."
     },
     "actions": {
-      "copyLink": "Copy Link",
+      "copyLink": "Sao chép liên kết",
       "viewDetail": "Xem chi tiết",
       "toggleLike": "Thích hoặc bỏ thích lời cảm ơn này",
       "likeError": "Không thể cập nhật lượt tim. Vui lòng thử lại.",
       "selfLikeError": "Bạn không thể thả tim cho Kudos do chính mình gửi.",
-      "copyLinkToast": "Link copied — ready to share!",
+      "copyLinkToast": "Đã sao chép liên kết!",
       "copyLinkError": "Không thể sao chép liên kết. Vui lòng thử lại."
     },
     "common": {
@@ -206,21 +206,39 @@
       "closeLightbox": "Đóng"
     },
     "composer": {
-      "title": "Gửi lời cảm ơn",
+      "title": "Gửi lời cám ơn và ghi nhận đến đồng đội",
       "recipientLabel": "Người nhận",
-      "recipientPlaceholder": "Tìm kiếm Sunner bạn muốn cảm ơn",
+      "recipientPlaceholder": "Tìm kiếm",
       "titleLabel": "Danh hiệu",
       "titlePlaceholder": "Dành tặng một danh hiệu cho đồng đội",
       "titleHintExample": "Ví dụ: Người truyền động lực cho tôi.",
       "titleHintUsage": "Danh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
-      "messageLabel": "Lời nhắn",
-      "messagePlaceholder": "Viết lời cảm ơn của bạn...",
+      "messageLabel": "Nội dung lời cảm ơn",
+      "messagePlaceholder": "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
+      "messageHint": "Bạn có thể “@ + tên” để nhắc tới đồng nghiệp khác",
+      "toolbarBold": "In đậm",
+      "toolbarItalic": "In nghiêng",
+      "toolbarStrike": "Gạch ngang",
+      "toolbarList": "Danh sách đánh số",
+      "toolbarLink": "Chèn liên kết",
+      "toolbarQuote": "Trích dẫn",
+      "communityStandards": "Tiêu chuẩn cộng đồng",
+      "linkPromptMessage": "Nhập đường dẫn (https://...)",
+      "linkInvalid": "Đường dẫn không hợp lệ, phải bắt đầu bằng http:// hoặc https://",
+      "mentionEmpty": "Không tìm thấy đồng nghiệp",
       "hashtagLabel": "Hashtag",
-      "imageLabel": "Hình ảnh đính kèm",
+      "hashtagAddButton": "Hashtag",
+      "maxCount": "Tối đa 5",
+      "hashtagRemoveLabel": "Xóa hashtag {name}",
+      "hashtagMenuEmpty": "Không còn hashtag nào",
+      "imageLabel": "Hình ảnh",
+      "imageAddButton": "Hình ảnh",
+      "imagePickerTitle": "Chọn ảnh",
+      "imageRemoveLabel": "Xóa ảnh {index}",
       "anonymousLabel": "Gửi lời cám ơn và ghi nhận ẩn danh",
       "anonymousNameLabel": "Tên hiển thị ẩn danh",
       "anonymousNamePlaceholder": "Nhập tên bạn muốn hiển thị",
-      "submit": "Gửi Kudos",
+      "submit": "Gửi",
       "cancel": "Hủy",
       "sending": "Đang gửi...",
       "successToast": "Đã gửi lời cảm ơn thành công!",
@@ -247,7 +265,7 @@
         },
         "anonymousName": {
           "required": "Vui lòng nhập tên hiển thị ẩn danh.",
-          "tooLong": "Tên ẩn danh không được vượt quá 120 ký tự."
+          "tooLong": "Tên ẩn danh không được vượt quá 60 ký tự."
         },
         "form": {
           "failed": "Không thể gửi lời cảm ơn. Vui lòng thử lại."

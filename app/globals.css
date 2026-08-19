@@ -28,6 +28,14 @@
   --kudos-muted: #999999; /* Details-Text-Secondary-2 — department/time labels on a kudos card */
   --kudos-sidebar-surface: #00070c; /* Details-Container-2 — D.1/D.3 sidebar box fill */
   --kudos-spotlight-name: #f17676; /* the one word-cloud name the design renders highlighted, e.g. 2940:14198 */
+
+  /*
+   * Design tokens measured from the MoMorph "Viết Kudo" composer frame (520:11647), screen
+   * ihQ26W78P2. The modal surface itself reuses `--kudos-card` (#FFF8E1 measured on this frame
+   * too) rather than a new token — same fill, one source of truth.
+   */
+  --kudos-required-mark: #cf1322; /* required-field asterisk on B.1/E.1 title labels — I520:11647;520:9872;416:5547 */
+  --kudos-composer-link: #e46060; /* "Tiêu chuẩn cộng đồng" toolbar link — I520:11647;3053:11619 */
 }
 
 @theme inline {
@@ -48,6 +56,8 @@
   --color-kudos-muted: var(--kudos-muted);
   --color-kudos-sidebar-surface: var(--kudos-sidebar-surface);
   --color-kudos-spotlight-name: var(--kudos-spotlight-name);
+  --color-kudos-required-mark: var(--kudos-required-mark);
+  --color-kudos-composer-link: var(--kudos-composer-link);
   --font-sans: var(--font-montserrat);
   --font-alt: var(--font-montserrat-alternates);
 }

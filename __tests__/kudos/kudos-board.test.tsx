@@ -15,9 +15,9 @@ describe("KudosBoard", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Hệ thống ghi nhận và cảm ơn" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "HIGHLIGHT KUDOS" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "SPOTLIGHT BOARD" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "ALL KUDOS" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "KUDOS NỔI BẬT" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "BẢNG VINH DANH" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "TẤT CẢ KUDOS" })).toBeInTheDocument();
     expect(screen.getByText("388 KUDOS")).toBeInTheDocument();
   });
 
